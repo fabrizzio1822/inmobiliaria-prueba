@@ -1,4 +1,5 @@
-const config = require('./config')
+const path = require('path');
+const config = require(path.resolve(__dirname, 'config.js'));
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
