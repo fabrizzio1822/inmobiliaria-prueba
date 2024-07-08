@@ -17,7 +17,7 @@ export function Header() {
     return (
         <div className="lg:container lg:mx-auto mx-2 mb-5 mt-3">
             <div className="flex items-center justify-between px-5 md:px-0">
-                <img src="/assets/Logo-titulo1.png" alt="Logo" className='logo-titulo' />
+                <img src="public/assets/Logo-titulo1.png" alt="Logo" className='logo-titulo' />
                 <Navbar/>
                 <div className="bars__menu" onClick={handleMenuClick}>
                     <span className={`line1__bars-menu ${menuOpen ? 'activeline1__bars-menu' : ''}`}></span>
