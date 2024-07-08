@@ -1,15 +1,14 @@
-const config = require('./config')
+// next.config.js
+require('dotenv').config();
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-    eslint:{
-        ignoreDuringBuilds:true
-    },
-    env: {
-        DB_URI : config.DB_URI,
-        API: config.API,
-        NEXTAUTH_SECRET: config.NEXTAUTH_SECRET,
-    }
+module.exports = {
+  reactStrictMode: true,
+  env: {
+    DB_URI: process.env.DB_URI,
+    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
+    API:
+      process.env.NODE_ENV === "production"
+        ? "https://xxx.vercel.app/api"
+        : "http://localhost:3000/api",
+  },
 };
-
-module.exports = nextConfig;
