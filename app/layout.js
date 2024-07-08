@@ -1,19 +1,29 @@
+'use client'
 import { Quicksand } from "next/font/google";
 import './globals.css'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
+import { SessionProvider } from "next-auth/react";
+import { Header } from "@/components/Header";
+import { Toaster } from "react-hot-toast";
+import Footer from "@/components/Footer/Footer";
 const quickSand = Quicksand({ subsets: ['latin'] })
 
-export const metadata = {
-  title: "Inmobiliaria Bobadilla",
-  description: "Inmobiliaria donde encontrás todo lo que buscás",
-};
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={quickSand.className}>{children}</body>
+    <SessionProvider>
+    
+      <body className={quickSand.className}>
+        <Header/>
+        <Toaster/>
+        {children}
+        
+        </body>
+    
+    </SessionProvider>
     </html>
   );
 }
