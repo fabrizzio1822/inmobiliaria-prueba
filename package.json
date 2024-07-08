@@ -12,6 +12,7 @@
     "akar-icons": "^1.9.31",
     "bcrypt": "^5.1.1",
     "cloudinary": "^2.2.0",
+    "config": "^3.3.12",
     "lottie-react": "^2.4.0",
     "mongoose": "^8.4.5",
     "mongoose-unique-validator": "^5.0.1",
