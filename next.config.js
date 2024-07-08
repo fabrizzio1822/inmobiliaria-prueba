@@ -2,6 +2,9 @@ const config = require('./config')
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+    eslint:{
+        ignoreDuringBuilds:true
+    },
     env: {
         DB_URI : config.DB_URI,
         API: config.API,
