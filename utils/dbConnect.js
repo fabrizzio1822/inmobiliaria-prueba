@@ -5,8 +5,14 @@ const dbConnect = async () => {
     return;
   }
 
+  const dbUri = process.env.DB_URI;
+
+  if (!dbUri) {
+    throw new Error("The `uri` parameter to `openUri()` must be a string, got 'undefined'. Check your environment variables.");
+  }
+
   try {
-    await mongoose.connect(process.env.DB_URI, {
+    await mongoose.connect(dbUri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
