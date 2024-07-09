@@ -2,6 +2,14 @@ require('dotenv').config();
 
 module.exports = {
   reactStrictMode: true,
+  images: {
+    remotePatterns: [
+        {
+            protocol: 'https',
+            hostname: 'res.cloudinary.com'
+        }
+    ]
+  },
   env: {
     DB_URI: process.env.DB_URI,
     CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,

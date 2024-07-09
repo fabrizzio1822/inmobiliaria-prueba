@@ -4,19 +4,22 @@ import Footer from "@/components/Footer/Footer";
 import Formulario from "@/components/formulario/Formulario";
 import { Header } from "@/components/Header";
 import Servicios from "@/components/Servicios/Servicios";
+import { TransitionPage } from "@/components/TransitionPage";
 import { SessionProvider } from "next-auth/react";
 import Image from "next/image";
 
 export default function Home() {
   return (
     <SessionProvider>
-    <div>
+      <TransitionPage/>
+    <main className="main">
       <Banner/>
-      <Servicios/>
+      <div className="max-w-6xl mx-auto">
+          <Servicios />
+      </div>
       <Formulario/>
       <Footer/> 
-      
-    </div>
+    </main>
     </SessionProvider>
   );
 }
