@@ -8,7 +8,6 @@ import Footer from "@/components/Footer/Footer";
 export default function Contactame(){
     return (
         <SessionProvider>
-            <Header/>
             <section class="informacion mt-8">
 					<div className="mt-6 md:mt-2">
                     <Phone className="color-bordo" strokeWidth={2} size={50} />
