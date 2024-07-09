@@ -64,5 +64,4 @@ export const authOptions = {
   pages: {
     signIn: '/login',
   },
-  debug: true, // Habilita el modo de depuración
 };
