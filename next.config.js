@@ -20,7 +20,7 @@ module.exports = {
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     API:
       process.env.NODE_ENV === "production"
-        ? "https://inmobiliaria-prueba-ixyyelutt-fabrizzio1822s-projects.vercel.app/api"
+        ? "https://https://inmobiliaria-prueba.vercel.app//api"
         : "http://localhost:3000/api",
   },
 };

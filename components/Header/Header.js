@@ -2,7 +2,7 @@
 
 import { CiMenuFries } from 'react-icons/ci';
 import Link from "next/link";
-
+import Image from 'next/image';
 import { useState } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 import { Person } from 'akar-icons';
@@ -20,7 +20,13 @@ export function Header() {
     return (
         <div className="lg:container lg:mx-auto mx-2 mb-5 mt-3">
             <div className="flex items-center justify-between px-5 md:px-0">
-                <img src="/assets/Logo-titulo1.png" alt="Logo" className='logo-titulo' />
+            <Image
+                                src='/assets/logo-titulo1.png'
+                                width={1100}
+                                height={900}
+                                alt="Logo"
+                                className='logo-titulo'
+                            />
                 <Navbar/>
                 <div className="bars__menu " onClick={handleMenuClick}>
                     <span className={`line1__bars-menu ${menuOpen ? 'activeline1__bars-menu' : ''}`}></span>
