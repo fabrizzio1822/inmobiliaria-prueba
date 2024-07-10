@@ -4,10 +4,10 @@ module.exports = {
   reactStrictMode: true,
   images: {
     remotePatterns: [
-        {
-            protocol: 'https',
-            hostname: 'res.cloudinary.com'
-        }
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com'
+      }
     ]
   },
   env: {
@@ -20,7 +20,7 @@ module.exports = {
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     API:
       process.env.NODE_ENV === "production"
-        ? "https://https://inmobiliaria-prueba.vercel.app//api"
+        ? "https://www.marialaurabobadilla.com.ar/api"
         : "http://localhost:3000/api",
   },
 };
