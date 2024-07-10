@@ -34,7 +34,7 @@ export default function ProductList(){
                 </div>
             ) : (
                 <div className="container mx-auto my-5">
-                    <p className="text-2xl font-bold mb-4">Listado de Viviendas</p>
+                    <p className="text-2xl font-bold mb-2">Listado de Viviendas</p>
                     <hr className="mb-4" />
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                         {products?.map((product) => (

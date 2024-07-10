@@ -1,6 +1,4 @@
 'use client';
-
-import { CiMenuFries } from 'react-icons/ci';
 import Link from "next/link";
 import Image from 'next/image';
 import { useState } from 'react';
@@ -62,7 +60,7 @@ export function Header() {
                     )}
                 </div>
             </div>
-            <div className={`barra-desplegable ${menuOpen ? 'show' : ''}`}>
+            <div className={`z-[999] barra-desplegable ${menuOpen ? 'show' : ''}`}>
                     <ul>
                         <li><a className='py-4 text-lg ml-4' href="/">Inicio</a></li>
                         <span className='color-gris text-sm mx-3 my-2'>Servicios Inmobiliarios</span><hr/>
@@ -90,9 +88,10 @@ export function Header() {
                         </button>
                         </>
                         ): (
-                            <Link href="/login" className='m-4 w-[50%] px-3 py-2 text-white rounded-lg bg-secondary hover:bg-black'>
+                         <a href="/login" className='ml-4 mt-3 block px-3 w-[50%] py-2 text-white hover:text-white rounded-lg bg-secondary hover:bg-black pointer text-center' >
                             Ingresar
-                        </Link>
+                            </a> 
+                        
                         )}
 
                     </ul>

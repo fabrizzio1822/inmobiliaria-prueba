@@ -13,7 +13,7 @@ export default function EvaluacionProyecto() {
                     <div className=" mx-auto px-6 ">
                         <div className="servicios-contenedor">
                             <div className="servicios-contenedor-texto ">
-                                <h3 className="titulo-servicio text-4xl py-4 font-bold color-gris">EVALUACIÓN DE PROYECTOS</h3>
+                                <h2 className="titulo-servicio text-4xl py-4 font-bold color-gris">EVALUACIÓN DE PROYECTOS</h2>
                                 <hr className="my-4" />
                                 <p className="py-4 color-gris">La evaluación tiene como fin asegurar decisiones fundamentadas y éxito sostenible. Se realiza un trabajo de análisis sistemático y objetivo de diversos aspectos de una iniciativa, desde su concepción hasta su implementación y seguimiento. Este proceso busca identificar oportunidades, evaluar riesgos, medir impactos y proporcionar información crítica para la toma de decisiones.</p>
                             </div>

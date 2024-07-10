@@ -14,7 +14,7 @@ export async function GET(req) {
     console.log("Search parameters:", searchParams);
 
     const { page, category, tag } = searchParams || {};
-    const pageSize = 6;
+    const pageSize = 20;
     const filter = {};
 
     if (category) {

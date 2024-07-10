@@ -27,7 +27,7 @@ export default function AdminNav() {
                 onClick={() => showComponent(<AdminTag />)}
                 className='text-black hover:text-blue-700 px-4 py-2 rounded-md mx-2'
             >
-                Tags
+                Ubicación
             </button>
             <button
                 onClick={() => showComponent(<AdminProduct />)}

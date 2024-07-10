@@ -34,7 +34,7 @@ export default function ProductCreate() {
 
   return (
     <div className="container mx-auto px-4">
-      <p className="text-lg font-bold mb-4">{updatingProduct ? "Actualizar" : "Crear"} Vivienda</p>
+      <p className="text-2xl font-bold mb-2">{updatingProduct ? "Actualizar" : "Crear"} Vivienda</p>
 
       <input
         type="text"

@@ -70,15 +70,14 @@ const Modal = ({ onClose }) => {
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex justify-center items-center">
+        <div className="fixed inset-0 z-50 flex justify-center items-center overflow-auto">
             <div className="modal-background fixed inset-0 bg-gray-900 opacity-50"></div>
-            <div className="modal-container bg-white absolute rounded-lg shadow-lg p-6 mx-auto mt-24 max-w-xl">
+            <div className="modal-container bg-white absolute rounded-lg shadow-lg p-3 mx-auto max-w-xl">
                 <div className="flex justify-between items-center mb-4">
                     <h2 className="sm:text-2xl font-bold">Solicitud de Tasación</h2>
                     <button onClick={onClose} className="text-gray-600 hover:text-gray-800">&times;</button>
                 </div>
                
-                
                 <form 
                     id="formulario" 
                     className="form-tasacion" 

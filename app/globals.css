@@ -35,7 +35,7 @@ body, html {
 }
 
 .barra-desplegable {
-  position: absolute;
+  position: fixed;
   background-color: #fff;
   width: 300px;
   top: 0;
@@ -784,7 +784,7 @@ html {
 }
 .formulario form{
 	position: absolute;
-	z-index: 1000;
+	z-index: 998;
 	margin: auto;
 }
 .formulario form h2{
