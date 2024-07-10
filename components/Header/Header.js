@@ -90,7 +90,7 @@ href={`/dashboard/${
                         </button>
                         </>
                         ): (
-                            <button href="./login" className='m-4 w-[50%] px-3 py-2 text-white rounded-lg bg-secondary hover:bg-black'>
+                            <button href="/login" className='m-4 w-[50%] px-3 py-2 text-white rounded-lg bg-secondary hover:bg-black'>
                             Ingresar
                         </button>
                         )}

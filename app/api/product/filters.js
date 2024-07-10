@@ -1,4 +1,4 @@
-import Product from "@/models/product";
+{/*import Product from "@/models/product";
 import Category from "@/models/category";
 import dbConnect from "@/utils/dbConnect";
 export default async function handler(req, res) {
@@ -42,4 +42,4 @@ export default async function handler(req, res) {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
-}
+}*/}
