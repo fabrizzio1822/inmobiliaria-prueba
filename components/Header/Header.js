@@ -41,9 +41,9 @@ export function Header() {
                         <>
                             <Link
                                 
-href={`/dashboard/${
-    data?.user?.role === "admin" ? "admin" : "user"
-  }`}
+                                href={`/dashboard/${
+                                    data?.user?.role === "admin" ? "admin" : "user"
+                                }`}
                                 className='color-bordo'
                             >
                                 <Person strokeWidth={2} size={36} />
@@ -90,9 +90,9 @@ href={`/dashboard/${
                         </button>
                         </>
                         ): (
-                            <button href="/login" className='m-4 w-[50%] px-3 py-2 text-white rounded-lg bg-secondary hover:bg-black'>
+                            <Link href="/login" className='m-4 w-[50%] px-3 py-2 text-white rounded-lg bg-secondary hover:bg-black'>
                             Ingresar
-                        </button>
+                        </Link>
                         )}
 
                     </ul>
