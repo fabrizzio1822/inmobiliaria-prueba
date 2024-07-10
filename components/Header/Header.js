@@ -79,9 +79,9 @@ href={`/dashboard/${
                         status == 'authenticated' ? (
                             <>
                             <li><a className=' text-lg ml-4' 
-href={`/dashboard/${
-    data?.user?.role === "admin" ? "admin" : "user"
-  }`}>Perfil</a></li>
+                            href={`/dashboard/${
+                                data?.user?.role === "admin" ? "admin" : "user"
+                            }`}>Perfil</a></li>
                             <button
                             onClick={() => signOut()}
                             className=' ml-4 mt-3 px-3 w-[50%] py-2 text-white rounded-lg bg-secondary hover:bg-black'
@@ -90,7 +90,7 @@ href={`/dashboard/${
                         </button>
                         </>
                         ): (
-                            <button href='/login' className='m-4 w-[50%] px-3 py-2 text-white rounded-lg bg-secondary hover:bg-black'>
+                            <button href="./login" className='m-4 w-[50%] px-3 py-2 text-white rounded-lg bg-secondary hover:bg-black'>
                             Ingresar
                         </button>
                         )}

@@ -9,8 +9,8 @@ export default function EvaluacionProyecto() {
         <SessionProvider>
             <TransitionPage />
             <div className="font-sans antialiased text-gray-900">
-                <section className="py-6">
-                    <div className=" mx-auto ">
+                <section className="sm:py-12">
+                    <div className=" mx-auto px-6 ">
                         <div className="servicios-contenedor">
                             <div className="servicios-contenedor-texto ">
                                 <h3 className="titulo-servicio text-4xl py-4 font-bold color-gris">EVALUACIÓN DE PROYECTOS</h3>
@@ -24,8 +24,8 @@ export default function EvaluacionProyecto() {
                                 alt="Evaluación de Proyectos"
                             />
                         </div>
-                       <div className="container mx-auto py-5 mt-12">
-                        <div className="mb-8">
+                        <div className="container m-auto py-5 mt-12">
+                            <div className="mb-8">
                                 <h3 className="text-3xl font-semibold color-bordo">Servicios Ofrecidos</h3>
                                 <ul className="list-disc list-inside mt-4 text-gray-700">
                                     <li className="md:text-xl">Análisis de viabilidad técnica, económica y financiera</li>
@@ -54,7 +54,7 @@ export default function EvaluacionProyecto() {
                                     <li className="md:text-xl">Resultados medibles y alineados con los objetivos del negocio</li>
                                 </ul>
                             </div>
-                       </div>
+                            </div>
                     </div>
                 </section>
                 <Footer/>
@@ -62,3 +62,4 @@ export default function EvaluacionProyecto() {
         </SessionProvider>
     );
 }
+
