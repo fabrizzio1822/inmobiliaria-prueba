@@ -6,6 +6,8 @@ import { SessionProvider } from "next-auth/react";
 import { signIn } from 'next-auth/react';
 import Link from "next/link";
 import { Header } from "@/components/Header";
+import Loader from "@/components/Loader/Loader";
+import { useSession} from 'next-auth/react';
 
 function LoginForm() {
     const [email, setEmail] = useState('');
@@ -14,6 +16,11 @@ function LoginForm() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const callbackUrl = searchParams.get('callbackUrl') || '/';
+    const { data, status } = useSession();
+
+    if (status === 'authenticated' ) {
+        router.push(callbackUrl)
+    }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -27,7 +34,7 @@ function LoginForm() {
                 setLoading(false);
             } else {
                 toast.success('Bienvenido otra vez!');
-                router.push(callbackUrl);
+                window.location.reload()
             }
         } catch (err) {
             console.log(err);
@@ -68,7 +75,7 @@ function LoginForm() {
 export default function Login() {
     return (
         <main>
-            <Suspense fallback={<div>Cargando...</div>}>
+            <Suspense fallback={<Loader/>}>
                 <LoginForm />
             </Suspense>
         </main>

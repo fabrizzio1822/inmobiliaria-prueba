@@ -8,13 +8,13 @@ const Modal = ({ onClose }) => {
     useEffect(() => {
         const body = document.querySelector('body');
         if (currentPart !== 0) {
-            body.style.overflow = 'hidden'; // Bloquear scroll cuando el modal está abierto
+            body.style.overflow = 'hidden';
         } else {
-            body.style.overflow = 'auto'; // Restaurar scroll cuando el modal se cierra
+            body.style.overflow = 'auto'; 
         }
 
         return () => {
-            body.style.overflow = 'auto'; // Asegurarse de restaurar scroll al desmontar el modal
+            body.style.overflow = 'auto'; 
         };
     }, [currentPart]);
 
@@ -86,16 +86,22 @@ const Modal = ({ onClose }) => {
                 >
                     
                     
-                        <div>
+                        <div className='sm:mt-[-55px]'>
                             <h3>Ingresa tus datos:</h3>
+                            <div className='flex sm:block gap-3 mb-3 sm:mb-0'>                            
                             <label htmlFor="nombre">Nombre:</label>
                             <input type="text" id="nombre" name="nombre" placeholder="Nombre" required /><br /><br />
                             <label htmlFor="apellido">Apellido:</label>
-                            <input type="text" id="apellido" name="apellido" placeholder="Apellido" required /><br /><br />
+                            <input type="text" id="apellido" name="apellido" placeholder="Apellido" required /><br /><br /></div>
+                            <div className='flex sm:block gap-3 mb-3 sm:mb-0'>
                             <label htmlFor="telefono">Teléfono:</label>
                             <input type="tel" id="telefono" name="telefono" placeholder="Teléfono" required /><br /><br />
                             <label htmlFor="email">Email:</label>
                             <input type="email" id="email" name="email" placeholder="Email" required /><br /><br />
+                            </div>
+
+
+
                             
                         </div>
                    
