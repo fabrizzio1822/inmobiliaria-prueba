@@ -1,9 +1,10 @@
 'use client';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination } from 'swiper/modules';
+import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
 import Image from 'next/image';
 import 'swiper/css';
+import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 export default function ProductImage({ product }) {
@@ -22,6 +23,14 @@ export default function ProductImage({ product }) {
     <div className="w-full max-w-5xl mx-auto">
       {product?.images?.length > 0 ? (
         <Swiper
+          cssMode={true}
+          navigation={true}
+          pagination={{
+            clickable: true,
+          }}
+          mousewheel={true}
+          keyboard={true}
+          modules={[Navigation, Pagination, Mousewheel, Keyboard]}
           breakpoints={{
             320: {
               slidesPerView: 1,
@@ -36,10 +45,6 @@ export default function ProductImage({ product }) {
               spaceBetween: 15,
             },
           }}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[Pagination]}
           className='w-full h-[600px]' // Mantener la altura fija para todas las imágenes
         >
           {product.images.map((image) => (

@@ -91,7 +91,6 @@ export function Header() {
                          <a href="/login" className='ml-4 mt-3 block px-3 w-[50%] py-2 text-white hover:text-white rounded-lg bg-secondary hover:bg-black pointer text-center' >
                             Ingresar
                             </a> 
-                        
                         )}
 
                     </ul>
