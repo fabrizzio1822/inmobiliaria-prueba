@@ -93,7 +93,7 @@ export default function Asesoramiento({ searchParams }) {
                                             </div>
                                             <p className="my-2">{product?.title}</p> 
                                             {product?.price > 0 && (
-                                                <p>${product?.price}</p>
+                                                <p>${product?.price} USD</p>
                                             )}
                                             <p className="text-sm mb-4">
                                                 <div
