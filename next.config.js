@@ -7,7 +7,15 @@ module.exports = {
       {
         protocol: 'https',
         hostname: 'res.cloudinary.com'
-      }
+      },
+      {
+        protocol: 'https',
+        hostname: 'static.tokkobroker.com',
+        // Opcional: puedes especificar el puerto si es necesario
+        // port: '',
+        // Opcional: puedes especificar el pathname si es necesario con wildcard
+        // pathname: '/pictures/**',
+      },
     ]
   },
   env: {

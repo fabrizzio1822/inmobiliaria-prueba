@@ -7,7 +7,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-export default function ProductImage({ product }) {
+export default function ProductImage({ property }) {
   const showImage = (src, title) => (
     <div className="relative w-full h-full overflow-hidden rounded-2xl">
       <Image
@@ -21,7 +21,7 @@ export default function ProductImage({ product }) {
 
   return (
     <div className="w-full max-w-5xl mx-auto">
-      {product?.images?.length > 0 ? (
+      {property?.photos?.length > 0 ? (
         <Swiper
           cssMode={true}
           navigation={true}

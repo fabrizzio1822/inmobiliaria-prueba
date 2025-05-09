@@ -55,7 +55,7 @@ export function Header() {
                         </>
                     ) : (
                         <Link href='/login' className='px-3 py-2 text-white rounded-lg bg-secondary hover:bg-black'>
-                            Ingresar
+                            Contactame
                         </Link>
                     )}
                 </div>
