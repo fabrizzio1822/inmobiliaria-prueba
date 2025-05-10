@@ -1,13 +1,8 @@
 import { HeaderData } from "./Header.types";
 
 export const dataHeader: HeaderData[] = [
-  {
-    id: 1,
-    name: "Inicio",
-    link: "/",
-  },
   { 
-    id: 2,  
+    id: 1,  
     name: 'Servicios Inmobiliarios', 
     link: '', 
     submenu: [
@@ -16,7 +11,7 @@ export const dataHeader: HeaderData[] = [
     ] 
 },
   {
-    id: 3,
+    id: 2,
     name: "Otros Servicios",
     link: "",
     submenu: [
@@ -25,8 +20,13 @@ export const dataHeader: HeaderData[] = [
   ] 
   },
   {
+    id: 3,
+    name: "Propiedades",
+    link: "/propiedad",
+  },
+  {
     id: 4,
-    name: "Contactame",
-    link: "/contactame",
+    name: "Alquileres Temporales",
+    link: "/alquileres", 
   },
 ];

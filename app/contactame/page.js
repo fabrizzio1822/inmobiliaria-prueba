@@ -1,13 +1,11 @@
 'use client'
-import { SessionProvider } from "next-auth/react";
-import { Header } from "@/components/Header";
-import Formulario from "@/components/formulario/Formulario";
 
+import Formulario from "@/components/formulario/Formulario";
 import {Phone, Envelope, Location} from 'akar-icons'
-import Footer from "@/components/Footer/Footer";
+
 export default function Contactame(){
     return (
-        <SessionProvider>
+        <div>
             <section class="informacion mt-8">
 					<div className="mt-6 md:mt-2">
                     <Phone className="color-bordo" strokeWidth={2} size={50} />
@@ -23,7 +21,6 @@ export default function Contactame(){
 					</div>
 				</section>
             <Formulario/>
-            <Footer/>   
-        </SessionProvider>
+        </div>
     )
 }

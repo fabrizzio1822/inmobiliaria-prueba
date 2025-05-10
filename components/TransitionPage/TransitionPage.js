@@ -1,11 +1,12 @@
+'use client'
 import { AnimatePresence, motion  } from "framer-motion"
 
 export function TransitionPage() {
     return (
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="">
             <div>
                 <motion.div
-                    className="fixed top-0 bottom-0 right-full w-screen h-screen z-30 bg-secondary"
+                    className="fixed top-0 bottom-0 right-full w-screen h-screen z-30 bg-main-100"
                     variants={transitionVariantsPage}
                     initial='initial'
                     animate='animate'
@@ -15,7 +16,7 @@ export function TransitionPage() {
 
                 </motion.div>
                 <motion.div
-                    className="fixed top-0 bottom-0 right-full w-screen h-screen z-20 bg-secondary/70 opacity-59"
+                    className="fixed top-0 bottom-0 right-full w-screen h-screen z-20 bg-main-100/70 opacity-59"
                     variants={transitionVariantsPage}
                     initial='initial'
                     animate='animate'

@@ -1,12 +1,10 @@
 'use client'
-import { SessionProvider } from "next-auth/react";
 import { TransitionPage } from "@/components/TransitionPage";
 import Image from 'next/image'
-import Footer from "@/components/Footer/Footer";
 
 export default function EvaluacionProyecto() {
     return (
-        <SessionProvider>
+        <div>
             <TransitionPage />
             <div className="font-sans antialiased text-gray-900">
                 <section className="sm:py-12">
@@ -22,6 +20,7 @@ export default function EvaluacionProyecto() {
                                 width={1100}
                                 height={900}
                                 alt="Evaluación de Proyectos"
+                                className="rounded-xl"
                             />
                         </div>
                         <div className="container m-auto py-5 mt-12">
@@ -57,9 +56,8 @@ export default function EvaluacionProyecto() {
                             </div>
                     </div>
                 </section>
-                <Footer/>
             </div>
-        </SessionProvider>
+        </div>
     );
 }
 

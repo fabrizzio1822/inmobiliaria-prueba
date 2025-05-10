@@ -17,7 +17,7 @@ export function Navbar() {
         <div className='gap-5 border-b-[1px] border-white lg:flex lg:block hidden '>
             {dataHeader.map(({ id, name, link, submenu }) => (
                 <div key={id} className="relative items-center group block flex" onClick={() => submenu && toggleSubmenu(id)}>
-                    <Link href={link} className="block hover:text-secondary hover:border-b-[1px]">
+                    <Link href={link} className="block hover:text-main-100 hover:border-b-[1px]">
                         {name}
                     </Link>
                     {submenu && (

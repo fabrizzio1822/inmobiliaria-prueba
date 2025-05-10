@@ -1,44 +1,100 @@
-import { InstagramFill, LinkedinBoxFill, FacebookFill } from 'akar-icons'
-export default function Footer() {
-    return (
-        <footer id="footer">
-            <div className="footer-container py-12">
-                <div className="footer-links-pagina">
-                    <ul className='container m-auto'>
-                        <li><a className='py-4 text-lg ml-4 hover:text-black' href="/">Inicio</a></li>
-                        <span className='text-white/40 text-sm'>Servicios Inmobiliarios</span>
-                        <li><a className='py-4 sm:text-lg text-sm ml-4 hover:text-black text-wrap text-center' href="/servicios-inmobiliarios/asesoramiento">Asesoramiento compra y venta</a></li>
-                        <li><a className='py-4 sm:text-lg text-sm ml-4 hover:text-black text-wrap text-center' href="/servicios-inmobiliarios/evaluacion">Evaluación de proyectos</a></li>
-                        <li><a className='py-4 text-lg ml-4 hover:text-black' href="/peritajes">Peritajes</a></li>
-                        <span className='text-white/40 text-sm '>Otros Sevicios</span>
-                        <li><a className='py-4 text-lg ml-4 hover:text-black' href="/tasaciones">Tasaciones</a></li>
-                        <li><a className='py-4 text-lg ml-4 hover:text-black' href="/contactame">Contactame</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <ul className="icons my-12">
-                        <h3 className='sm:text-lg font-bold mb-2 text-sm'>Seguime en mis redes:</h3>
-                        <div className='flex text-center hover:text-black'>
-                        <a className="no-underline flex" href="https://www.linkedin.com/in/mar%C3%ADa-laura-bobadilla-98020020a/"> 
-                        <LinkedinBoxFill className="i py-2" strokeWidth={2} size={36}></LinkedinBoxFill><span className='mt-1 text-xl'>Linkedin</span>
-                        </a>
-                        </div>
-                        <div className='flex text-center hover:text-black'>
-                        <a className="no-underline flex" href="https://www.instagram.com/bobadillamarialaura/">
-                        <InstagramFill className="i py-2" strokeWidth={2} size={36}></InstagramFill><span className='mt-1 text-xl'>Instagram</span>
-                        </a>                       
-                        </div>
-                        <div className='flex text-center hover:text-black'>
-                        <a className="no-underline flex" href="#"> 
-                        <FacebookFill className="i py-2" strokeWidth={2} size={36}></FacebookFill><span className='mt-1 text-xl'>Facebook</span>
-                        </a>
-                        </div>
-                    </ul>
-                </div>
+'use client';
+import Link from "next/link";
+import Image from "next/image";
+import { dataHeader } from "@/components/Header/Header.data"; // Importa tu objeto de navegación
+import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'; // Importa iconos de contacto
+
+export const Footer = () => {
+  return (
+    <div className="w-full py-16 lg:py-24 bg-foreground text-background">
+      <div className="container mx-auto">
+        <div className="grid lg:grid-cols-2 gap-10 items-start">
+          {/* Columna del Logo y Descripción */}
+          <div className="flex gap-8 flex-col items-start">
+            <div className="flex gap-2 flex-col">
+              <Image
+                src='/assets/logo-footer.webp'
+                width={200} // Ajusta el ancho según necesites
+                height={150} // Ajusta la altura según necesites
+                alt="Logo Inmobiliaria"
+                className=''
+              />
+              <p className="text-lg max-w-md leading-relaxed tracking-tight text-background/75 text-left">
+                Tu socio estratégico en la búsqueda de la propiedad ideal y la gestión integral de tus bienes raíces.
+              </p>
             </div>
-            <div className="copyright">
-                <p>© 2024 - Maria Laura Bobadilla. Todos los derechos reservados</p>
+            {/* Información de Contacto */}
+            <div className="flex gap-4 flex-col text-sm max-w-lg leading-relaxed tracking-tight text-background/75 text-left">
+              <p className="flex items-center gap-2"><FaMapMarkerAlt /> Córdoba, Argentina</p>
+              <p className="flex items-center gap-2"><FaPhone /> +54 9 [Tu número de teléfono]</p>
+              <p className="flex items-center gap-2"><FaEnvelope /> [Tu correo electrónico]</p>
             </div>
-        </footer>
-    )
-}
+          </div>
+
+          {/* Columnas de Navegación */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {/* Sección de Servicios Inmobiliarios */}
+            <div>
+              <p className="text-xl font-semibold mb-4">Servicios Inmobiliarios</p>
+              <div className="flex flex-col gap-2">
+                {dataHeader
+                  .find((item) => item.name === 'Servicios Inmobiliarios')
+                  ?.submenu?.map((subItem) => (
+                    <Link
+                      key={subItem.id}
+                      href={subItem.link}
+                      className="text-background/75 hover:text-bordo transition-colors"
+                    >
+                      {subItem.name}
+                    </Link>
+                  ))}
+              </div>
+            </div>
+
+            {/* Sección de Otros Servicios */}
+            <div>
+              <p className="text-xl font-semibold mb-4">Otros Servicios</p>
+              <div className="flex flex-col gap-2">
+                {dataHeader
+                  .find((item) => item.name === 'Otros Servicios')
+                  ?.submenu?.map((subItem) => (
+                    <Link
+                      key={subItem.id}
+                      href={subItem.link}
+                      className="text-background/75 hover:text-bordo transition-colors"
+                    >
+                      {subItem.name}
+                    </Link>
+                  ))}
+              </div>
+            </div>
+
+            {/* Enlaces Directos */}
+            <div>
+              <p className="text-xl font-semibold mb-4">Enlaces</p>
+              <div className="flex flex-col gap-2">
+                {dataHeader
+                  .filter((item) => !item.submenu && item.link)
+                  .map((item) => (
+                    <Link
+                      key={item.id}
+                      href={item.link}
+                      className="text-background/75 hover:text-bordo transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                <Link href="/contacto" className="text-background/75 hover:text-bordo transition-colors">
+                  Contacto
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="w-full bg-foreground/90 text-background/75 py-4 text-center text-sm">
+        <p>© {new Date().getFullYear()} - Maria Laura Bobadilla. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  );
+};

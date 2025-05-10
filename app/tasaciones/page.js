@@ -6,7 +6,7 @@ import { TransitionPage } from "@/components/TransitionPage";
 
 import Image from 'next/image';
 import Modal from '@/components/modal/Modal';
-import Footer from '@/components/Footer/Footer';
+
 function TasacionesPagina() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const openModal = () => {
@@ -69,7 +69,6 @@ function TasacionesPagina() {
                 </div>
             </div>
             </div>
-            <Footer/>
         </SessionProvider>
     );
 }

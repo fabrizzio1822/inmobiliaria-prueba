@@ -8,7 +8,7 @@ export default function Formulario(){
 					<input className="formulario-datos p-2 color-negro" type="email" id="email" name="email" placeholder="E-mail"/><br/>
 					<input className="formulario-datos p-2 color-negro " type="numero" id="numero" name="numero" placeholder="Numero"/><br/>
 					<textarea className="formulario-datos p-2 color-negro" id="texto" name="texto" placeholder="Comentarios"/><br/>
-					<input className="border-rounded px-5 rounded-lg py-4 text-white bg-bordo hover:bg-black pointer" type="submit" value="Enviar"/>
+					<input className="border-rounded px-5 rounded-lg py-4 text-white bg-main-100 hover:bg-main-200 pointer" type="submit" value="Enviar"/>
 				
 					<input type="hidden" name="_next" value="https://www.marialaurabobadilla.com.ar/"/>
 					<input type="hidden" name="_captcha" value="false"/>

@@ -5,32 +5,27 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 import 'swiper/css/navigation'
-import { SessionProvider } from "next-auth/react";
 import { Header } from "@/components/Header";
 import { Toaster } from "react-hot-toast";
-import { CategoryProvider } from "@/context/category";
-import { TagProvider } from "@/context/tag";
-import { ProductProvider } from "@/context/product";
+import { TokkoSearchProvider } from "@/context/SearchContext";
+import { Footer } from "@/components/Footer/Footer";
 const quickSand = Quicksand({ subsets: ['latin'] })
 
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-    <SessionProvider>
-      <CategoryProvider>
-        <TagProvider>
-        <ProductProvider>
+
+          <TokkoSearchProvider>
+
       <body className={quickSand.className}>
         <Header/>
         <Toaster/>
         {children}
-        
+        <Footer/>
         </body>
-        </ProductProvider>
-        </TagProvider>
-      </CategoryProvider>
-    </SessionProvider>
+        </TokkoSearchProvider>
+
     </html>
   );
 }

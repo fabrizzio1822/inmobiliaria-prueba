@@ -8,7 +8,7 @@ export default function Servicios () {
             <div className="max-w-[450px]">
                 <h1 className="text-2xl leading-tigth text-center md:text-left md:text-4xl lg:mb-5">
                     Mis {' '}
-                    <span className="font-bold text-secondary">
+                    <span className="font-bold text-main-100">
                         Servicios
                     </span>
                 </h1>

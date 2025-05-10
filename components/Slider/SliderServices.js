@@ -69,7 +69,7 @@ const SliderServices = () => {
                         </div>
                         <h3 className="text-lg font-semibold mb-2">{service.title}</h3>
                         <p className="text-sm mb-4 flex-grow ">{service.description}</p>
-                        <a href={service.link} className="color-bordo font-bold underline mt-auto mb-4">Más información</a>
+                        <a href={service.link} className="text-main-100 font-bold underline mt-auto mb-4">Más información</a>
                     </div>
                 </SwiperSlide>
             ))}

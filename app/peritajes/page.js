@@ -1,12 +1,11 @@
 'use client'
-import { SessionProvider } from "next-auth/react";
 import { TransitionPage } from "@/components/TransitionPage";
 import Image from 'next/image'
-import Footer from "@/components/Footer/Footer";
+
 
 export default function Peritajes() {
     return (
-        <SessionProvider>
+        <div>
             <TransitionPage />
             <div className="font-sans antialiased text-gray-900">
                 <section className="sm:py-12">
@@ -31,8 +30,6 @@ export default function Peritajes() {
                                 <li className="md:text-xl">Peritajes inmobiliarios</li>
                                 <li className="md:text-xl">Peritajes industriales</li>
                                 <li className="md:text-xl">Peritajes financieros</li>
-                                <li className="md:text-xl">Peritajes de seguros</li>
-                                <li className="md:text-xl">Peritajes forenses</li>
                             </ul>
                         </div>
                         <div className="mb-8">
@@ -43,7 +40,6 @@ export default function Peritajes() {
                                 <li className="md:text-xl">Tasaciones de bienes inmuebles</li>
                                 <li className="md:text-xl">Análisis de riesgos</li>
                                 <li className="md:text-xl">Auditorías técnicas</li>
-                                <li className="md:text-xl">Investigaciones forenses</li>
                             </ul>
                         </div>
                         <div className="mb-8">
@@ -73,8 +69,7 @@ export default function Peritajes() {
                         </div>
                     </div>
                 </section>
-                <Footer/>
             </div>
-        </SessionProvider>
+        </div>
     );
 }
