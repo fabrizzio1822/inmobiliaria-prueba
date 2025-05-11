@@ -21,9 +21,9 @@ export default async function Asesoramiento (){
           </div>
           <Image src='/assets/planos.jpg' width={1100} height={900} alt="Planos de propiedades" />
         </div>
-            <h2 className="text-3xl text-bold font-bold color-bordo py-3">Viviendas</h2>
+            <h2 className="text-3xl px-4 text-bold font-bold color-bordo py-3">Viviendas</h2>
             <hr className="mb-4" />
-            <div className="grid grid-cols-1  md:grid-cols-3 gap-6 container mx-auto px-6 my-5 py-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 container mx-auto px-6 my-5 py-4">
             {propiedades.map((property) => (
                  (
                   <div key={property.id} className="border rounded-lg shadow-lg overflow-hidden flex flex-col bg-white min-h-[500px]">

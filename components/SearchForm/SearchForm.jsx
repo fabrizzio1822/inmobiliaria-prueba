@@ -20,17 +20,17 @@ export default function SearchForm() {
   };
 
   return (
-    <form onSubmit={handleSearch} className="flex items-center gap-2 w-full max-w-xl mx-auto my-6">
+    <form onSubmit={handleSearch} className="flex flex-col sm:flex-row items-center gap-2 w-full max-w-xl mx-auto my-6">
       <input
         type="text"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Buscar por tipo, ubicación, características..."
-        className="px-4 py-3 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-bordo focus:border-bordo flex-grow text-gray-700 text-sm"
+        className="px-4 py-3 border border-gray-300  rounded-lg sm:rounded-l-lg focus:ring-2 focus:border-bordo flex-grow text-gray-700 text-sm"
       />
       <button
         type="submit"
-        className="bg-main-100 hover:bg-main-200 text-white font-semibold py-3 px-6 rounded-r-lg flex items-center justify-center transition-colors duration-150 text-sm"
+        className="bg-main-100 hover:bg-main-200 text-white font-semibold py-3 px-6 rounded-lg sm:rounded-r-lg flex items-center justify-center transition-colors duration-150 text-sm"
       >
         {/* <FiSearch className="mr-2 h-5 w-5" /> Reemplaza con tu ícono si lo tienes */}
         Buscar

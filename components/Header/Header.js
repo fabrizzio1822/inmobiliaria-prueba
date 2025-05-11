@@ -13,14 +13,14 @@ export function Header() {
 
     return (
         <div className="lg:container lg:mx-auto mx-2 mb-5 mt-3">
-            <div className="flex items-center justify-between px-5 md:px-0">
+            <div className="flex items-center justify-between px-5 lg:px-0">
                 <Link href='/'> 
                     <Image
                         src='/assets/logo1.png'
                         width={310}
                         height={900}
                         alt="Logo"
-                        className=''
+                        className=' sm:max-w-[270px] lg:max-w-[310px]'
                     />
                 </Link>
                 <Navbar/>
@@ -46,7 +46,11 @@ export function Header() {
                         <li><a className='py-4 text-lg ml-4' href="/peritajes">Peritajes</a></li>
                         <li><a className='py-4 text-lg ml-4' href="/tasaciones">Tasaciones</a></li>
                         <hr/>
-                        <li><a className='py-4 text-lg ml-4' href="/contactame">Contactame</a></li>
+                        <li><a className='py-4 text-lg ml-4' href="/propiedad">Propiedades</a></li>
+                        <li><a className='py-4 text-lg ml-4' href="/alquileres">Alquileres</a></li>
+                        <hr/>
+
+                        <li><a className='py-2 text-lg ml-2 bg-main-100 px-4 text-white rounded-3xl ' href="/contactame">Contactame</a></li>
 
                     </ul>
                 </div>

@@ -9,8 +9,8 @@ export default async function Alquileres (){
 
     return (
         <div className="min-h-screen container mx-auto" >
-            <h1 className="text-3xl font-bold text-center mt-8">Alquileres</h1>
-            <div className="grid grid-cols-1  md:grid-cols-3 gap-6 container mx-auto px-6 my-5 py-4">
+            <h1 className="text-3xl px-4 font-bold text-center mt-8">Alquileres</h1>
+            <div className="grid  md:grid-cols-2 lg:grid-cols-3 gap-6 container mx-auto px-6 my-5 py-4">
             {propiedades.map((property) => (
                 (property.operations[0]?.operation_type !== 'Venta'  ? (
                   <div key={property.id} className="border rounded-lg shadow-lg overflow-hidden flex flex-col bg-white min-h-[500px]">

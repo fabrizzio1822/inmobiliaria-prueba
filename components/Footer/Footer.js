@@ -6,28 +6,28 @@ import { FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa'; // Importa
 
 export const Footer = () => {
   return (
-    <div className="w-full py-16 lg:py-24 bg-foreground text-background">
-      <div className="container mx-auto">
-        <div className="grid lg:grid-cols-2 gap-10 items-start">
+    <div className="w-full py-16 lg:py-24  bg-foreground text-background">
+      <div className="container overflow-hidden mx-auto px-4">
+        <div className="grid lg:grid-cols-2 gap-10 items-end">
           {/* Columna del Logo y Descripción */}
           <div className="flex gap-8 flex-col items-start">
             <div className="flex gap-2 flex-col">
               <Image
                 src='/assets/logo-footer.webp'
-                width={200} // Ajusta el ancho según necesites
-                height={150} // Ajusta la altura según necesites
+                width={350} // Ajusta el ancho según necesites
+                height={100} // Ajusta la altura según necesites
                 alt="Logo Inmobiliaria"
                 className=''
               />
               <p className="text-lg max-w-md leading-relaxed tracking-tight text-background/75 text-left">
-                Tu socio estratégico en la búsqueda de la propiedad ideal y la gestión integral de tus bienes raíces.
+                Te ayudo en la búsqueda de la propiedad ideal y la gestión integral de tus bienes raíces.
               </p>
             </div>
             {/* Información de Contacto */}
             <div className="flex gap-4 flex-col text-sm max-w-lg leading-relaxed tracking-tight text-background/75 text-left">
-              <p className="flex items-center gap-2"><FaMapMarkerAlt /> Córdoba, Argentina</p>
-              <p className="flex items-center gap-2"><FaPhone /> +54 9 [Tu número de teléfono]</p>
-              <p className="flex items-center gap-2"><FaEnvelope /> [Tu correo electrónico]</p>
+              <p className="flex items-center gap-2"><FaMapMarkerAlt /> Neuquén, Argentina</p>
+              <p className="flex items-center gap-2"><FaPhone /> +54 9 299 - 154 213 223</p>
+              <p className="flex items-center gap-2"><FaEnvelope /> marialaurabobadilla@outlook.com</p>
             </div>
           </div>
 
@@ -92,7 +92,8 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="w-full bg-foreground/90 text-background/75 py-4 text-center text-sm">
+      <hr className="max-w-xl  mx-auto mt-20 "/>
+      <div className="w-full bg-foreground/90 text-background/75 py-4 text-center text-sm mt-24">
         <p>© {new Date().getFullYear()} - Maria Laura Bobadilla. Todos los derechos reservados.</p>
       </div>
     </div>
