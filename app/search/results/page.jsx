@@ -7,7 +7,7 @@ import { FaCamera } from 'react-icons/fa';
 // Función para obtener los datos de búsqueda
 async function getSearchedProperties(query) {
   // Asegúrate de que la URL de la API sea la correcta para tu entorno
-  const apiUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+  const apiUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.marialaurabobadilla.com.ar/';
   
   let fetchUrl = `${apiUrl}/api/properties/search`;
   if (query) {
