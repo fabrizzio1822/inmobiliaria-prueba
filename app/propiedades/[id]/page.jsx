@@ -7,6 +7,8 @@ import PhotoSlider from "@/components/PhotoSlider/PhotoSlider";
 import React from "react";
 
 import { Badge } from "@/components/ui/badge"; // Asumo que es de shadcn/ui o similar
+import Form from "@/components/Form/Form";
+import { TransitionPage } from "@/components/TransitionPage";
 
 
 // Helper para limpiar la descripción y manejar el HTML si es necesario
@@ -45,6 +47,7 @@ export default async function Propiedad({ params }) {
 
   return (
     <div>
+      <TransitionPage/>
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Encabezado de la Propiedad */}
         <div className="mb-6">
@@ -54,7 +57,7 @@ export default async function Propiedad({ params }) {
             </h1>
             {operationType && (
               <Badge 
-                className="text-sm font-semibold whitespace-nowrap bg-main-100 text-white" // Ajusta bg-bordo
+                className="max-w-[65px] text-sm font-semibold whitespace-nowrap bg-main-100 text-white" // Ajusta bg-bordo
               >
                 {operationType}
               </Badge>
@@ -164,6 +167,7 @@ export default async function Propiedad({ params }) {
                 )}
               </div>
             )}
+            
 
             {/* Información del Agente/Productor */}
             {property.producer && (
@@ -210,6 +214,8 @@ export default async function Propiedad({ params }) {
                 {/* Aquí podrías agregar un formulario de contacto simple si lo deseas */}
               </div>
             )}
+
+            <Form propertyname={property.publication_title} />
 
              {/* Detalles Adicionales de la Sucursal (si es relevante y diferente) */}
             {property.branch && (

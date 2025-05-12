@@ -3,12 +3,14 @@ import Link from "next/link";
 import { LiaBathSolid, LiaBedSolid, LiaRulerCombinedSolid } from "react-icons/lia";
 import { Location } from 'akar-icons';
 import { FaCamera } from 'react-icons/fa'; 
+import { TransitionPage } from "@/components/TransitionPage";
 export default async function PropiedadesTokko (){
 
     const propiedades = await fetchTokkoProperties();
 
     return (
         <div className=" container mx-auto" >
+           <TransitionPage/>
             <h1 className="text-3xl font-bold text-center mt-8">Propiedades</h1>
             <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-6 container mx-auto px-6 my-5 py-4">
             {propiedades.map((property) => (

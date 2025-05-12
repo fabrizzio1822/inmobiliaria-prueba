@@ -26,7 +26,7 @@ export const dataHeader: HeaderData[] = [
   },
   {
     id: 4,
-    name: "Alquileres Temporales",
+    name: "Alquileres",
     link: "/alquileres", 
   },
 ];

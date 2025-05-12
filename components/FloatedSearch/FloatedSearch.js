@@ -35,7 +35,7 @@ export default function FloatedSearch() {
           // Conectar el input al estado local
           onChange={e => setSearchTerm(e.target.value)} 
           value={searchTerm}
-          className='px-3 md:w-[70%] w-full md:py-2 py-4 md:mx-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-bordo focus:border-bordo' // Añadidos estilos para consistencia y foco
+          className='px-3 md:w-[70%] w-full md:py-2 py-4 md:mx-3 border border-gray-300 rounded-md  ' // Añadidos estilos para consistencia y foco
         />
         <button 
           type='submit'

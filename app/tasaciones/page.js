@@ -6,6 +6,7 @@ import { TransitionPage } from "@/components/TransitionPage";
 
 import Image from 'next/image';
 import Modal from '@/components/modal/Modal';
+import { House } from 'lucide-react';
 
 function TasacionesPagina() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -16,22 +17,30 @@ function TasacionesPagina() {
         setIsModalOpen(false);
     };
     return (
-        <SessionProvider>
+        <div>
             <TransitionPage/>
             
-            <div className=' px-6'>
-            <div className="servicios-contenedor max-w-7xl  ">
-                        <div id="texto-derecha" className=" servicios-contenedor-texto">
-                        <h1 className="titulo-servicio text-4xl py-4 font-bold color-gris">TASACIONES</h1>
-                        <hr/>
-                        <p className="py-4 color-gris">Los servicios de tasaciones desempeñan un papel crucial en el mundo financiero, inmobiliario y empresarial al proporcionar evaluaciones precisas y confiables sobre el valor de diversos activos.</p>
-                        </div>
-                        <Image 
-                        src='/assets/tasacion.jpg'
-                        width={1100}
-                        height={900}
-                        />
-                    </div>
+            <div className='container mx-auto px-6'>
+            <div className="flex flex-col lg:flex-row sm:py-12 gap-8 md:gap-12 lg:gap-20 max-w-7xl mx-auto">
+                {/* Text Content */}
+                <div className="flex flex-col justify-center flex-1">
+                    <h1 className="sm:text-4xl text-2xl py-4 font-bold text-zinc-700">TASACIONES</h1>
+                    <hr className="bg-main-100 max-w-sm h-[5px] my-2" />
+                    <p className="py-4 text-gray-700 md:text-lg">
+                    Los servicios de tasaciones desempeñan un papel crucial en el mundo financiero, inmobiliario y
+                    empresarial al proporcionar evaluaciones precisas y confiables sobre el valor de diversos activos.
+                    </p>
+                </div>
+
+                {/* Image */}
+                <Image
+                    className="rounded-xl w-full lg:max-w-md lg:max-w-lg object-cover"
+                    src="/assets/tasacion.jpg"
+                    width={1100}
+                    height={900}
+                    alt="Tasaciones"
+                />
+                </div>
             <div className="bg-white">
                 <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                     <h1 className="text-4xl font-bold text-gray-800 mb-4">Tasaciones</h1>
@@ -42,12 +51,12 @@ function TasacionesPagina() {
                         <hr className="border-gray-300 mb-8" />
                         <div className="relative">
                             {isModalOpen && <Modal onClose={closeModal} />}
-                            <button onClick={openModal} className="open">Quiero mi Tasación <i className="ai-home-alt1"></i></button>
+                            <button onClick={openModal} className="flex item-center justify-center gap-2 bg-main-100 text-white py-4 px-6 rounded-2xl font-bold hover:bg-main-200 transition duration-200">Quiero mi Tasación <House/> </button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="bg-gray-100">
+            <div className="bg-gray-200 rounded-xl my-10 ">
                 <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                     <div className="space-y-6">
                         <h2 className="text-3xl font-bold text-gray-800">Más sobre Nuestros Servicios de Tasaciones</h2>
@@ -69,7 +78,7 @@ function TasacionesPagina() {
                 </div>
             </div>
             </div>
-        </SessionProvider>
+        </div>
     );
 }
 export default TasacionesPagina;

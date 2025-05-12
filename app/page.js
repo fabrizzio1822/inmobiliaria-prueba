@@ -12,7 +12,7 @@ export default function Home() {
     <main className="main">
       <Banner/>
       
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl px-4 mx-auto">
           <Servicios />
       </div>
       

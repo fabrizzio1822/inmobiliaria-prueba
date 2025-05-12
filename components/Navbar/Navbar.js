@@ -32,7 +32,7 @@ export function Navbar() {
     };
 
     return (
-        <div className='gap-5 border-white lg:flex lg:block hidden '>
+        <div className='lg:gap-2 xl:gap-5 border-white lg:flex lg:block hidden '>
             {dataHeader.map(({ id, name, link, submenu }) => (
                 <div
                     key={id}

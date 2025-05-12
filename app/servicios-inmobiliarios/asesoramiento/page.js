@@ -13,15 +13,31 @@ export default async function Asesoramiento (){
     return (
         <div className=" container mx-auto" >
             <TransitionPage/>
-            <div className="servicios-contenedor sm:py-12">
-          <div id="texto-derecha" className="servicios-contenedor-texto">
-            <h2 className="titulo-servicio sm:text-4xl text-2xl py-4 font-bold color-gris">ASESORAMIENTO INTEGRAL EN COMPRA Y VENTA DE PROPIEDADES</h2>
-            <hr />
-            <p className="py-4 color-gris">El servicio de asesoramiento en la compra y venta de propiedades desempeña un papel crucial al brindar orientación especializada a clientes que buscan realizar transacciones inmobiliarias. Este servicio integral, proporcionado por una profesional en bienes raíces, abarca desde la identificación de oportunidades hasta la gestión de cierres exitosos.</p>
+           <div className="flex px-4 flex-col lg:flex-row sm:py-12 gap-8 md:gap-12 lg:gap-20">
+            {/* Text Content */}
+            <div className="flex flex-col justify-center flex-1">
+              <h2 className="sm:text-4xl text-2xl py-4 font-bold text-zinc-700">
+                ASESORAMIENTO INTEGRAL EN COMPRA Y VENTA DE PROPIEDADES
+              </h2>
+              <hr className="bg-main-100 max-w-sm h-[5px] my-2" /> {/* Ajusté el grosor del hr y el margen vertical */}
+              <p className="py-4 md:text-lg text-gray-700">
+                El servicio de asesoramiento en la compra y venta de propiedades desempeña un papel crucial al
+                brindar orientación especializada a clientes que buscan realizar transacciones inmobiliarias. Este
+                servicio integral, proporcionado por una profesional en bienes raíces, abarca desde la
+                identificación de oportunidades hasta la gestión de cierres exitosos.
+              </p>
+            </div>
+
+            {/* Image */}
+            <Image
+              className="rounded-xl w-full lg:max-w-md lg:max-w-lg object-cover"
+              src="/assets/planos.jpg"
+              width={700}
+              height={500}
+              alt="Planos de propiedades"
+            />
           </div>
-          <Image src='/assets/planos.jpg' width={1100} height={900} alt="Planos de propiedades" />
-        </div>
-            <h2 className="text-3xl px-4 text-bold font-bold color-bordo py-3">Viviendas</h2>
+            <h2 className="text-3xl px-4 text-bold font-bold text-main-100 py-3">Viviendas</h2>
             <hr className="mb-4" />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 container mx-auto px-6 my-5 py-4">
             {propiedades.map((property) => (
