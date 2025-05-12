@@ -57,7 +57,7 @@ export default async function Propiedad({ params }) {
             </h1>
             {operationType && (
               <Badge 
-                className="max-w-[65px] text-sm font-semibold whitespace-nowrap bg-main-100 text-white" // Ajusta bg-bordo
+                className="max-w-[70px] text-center text-sm font-semibold whitespace-nowrap bg-main-100 text-white" // Ajusta bg-bordo
               >
                 {operationType}
               </Badge>

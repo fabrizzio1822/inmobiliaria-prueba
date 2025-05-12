@@ -35,6 +35,7 @@ export default async function Asesoramiento (){
               width={700}
               height={500}
               alt="Planos de propiedades"
+              objectFit="cover"
             />
           </div>
             <h2 className="text-3xl px-4 text-bold font-bold text-main-100 py-3">Viviendas</h2>

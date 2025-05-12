@@ -39,6 +39,7 @@ function TasacionesPagina() {
                     width={1100}
                     height={900}
                     alt="Tasaciones"
+                    objectFit="cover"
                 />
                 </div>
             <div className="bg-white">

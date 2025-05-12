@@ -29,6 +29,7 @@ export default function EvaluacionProyecto() {
                                 width={700}
                                 height={500}
                                 alt="Evaluación de Proyectos"
+                                objectFit="cover"
                             />
                             </div>
                         <div className="container m-auto py-5 mt-12">

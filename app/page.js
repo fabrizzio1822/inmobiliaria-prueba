@@ -7,7 +7,7 @@ import { TokkoSearchProvider } from "@/context/SearchContext";
 
 export default function Home() {
   return (
-     <TokkoSearchProvider>
+     <div>
        <TransitionPage/>
     <main className="main">
       <Banner/>
@@ -19,6 +19,6 @@ export default function Home() {
         <Formulario/>
         
     </main>
-     </TokkoSearchProvider>
+     </div>
   );
 }

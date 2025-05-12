@@ -33,6 +33,7 @@ export default function Peritajes() {
                             width={1100}
                             height={900}
                             alt="Peritajes"
+                            objectFit="cover"
                         />
                         </div>
                         <div className="container m-auto py-5 mt-12">
