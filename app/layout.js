@@ -97,12 +97,13 @@ export const metadata = {
     alt: 'Logo de Inmobiliaria María Laura Bobadilla',
   },
   alternates: {
-    canonical: 'www.marialaurabobadilla.com.ar',
+    canonical: 'https://www.marialaurabobadilla.com.ar',
     languages: {
-      'es-AR': 'www.marialaurabobadilla.com.ar',
+      'es': 'https://www.marialaurabobadilla.com.ar',
+      'es-AR': 'https://www.marialaurabobadilla.com.ar',
+      'x-default': 'https://www.marialaurabobadilla.com.ar',
     }
-
-  },
+  }
  
 };
 

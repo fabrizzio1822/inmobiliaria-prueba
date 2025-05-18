@@ -4,25 +4,29 @@ const services = [
     title: "Asesoramiento en compra y venta",
     description: "Ofrecemos asesoramiento experto en la compra y venta de propiedades, ayudándote a tomar las mejores decisiones.",
     link: "/servicios-inmobiliarios/asesoramiento",
-    img: "/assets/planos.jpg"
+    img: "/assets/planos.jpg",
+    linktext: 'Ver más de Asesoramiento'
   },
   {
     title: "Evaluación de proyectos",
     description: "Realizamos evaluaciones detalladas de proyectos inmobiliarios para asegurar su viabilidad y rentabilidad.",
     link: "/servicios-inmobiliarios/evaluacion",
-    img: "/assets/evaluacion-proyectos.jpg"
+    img: "/assets/evaluacion-proyectos.jpg",
+    linktext: 'Ver más de Evaluación'
   },
   {
     title: "Tasaciones",
     description: "Proveemos servicios de tasación precisos para determinar el valor real de las propiedades.",
     link: "/tasaciones",
-    img: "/assets/tasacion.jpg"
+    img: "/assets/tasacion.jpg",
+    linktext: 'Ver más de Tasaciones'
   },
   {
     title: "Peritajes",
     description: "Ofrecemos servicios de peritaje para resolver disputas y brindar claridad sobre el estado de las propiedades.",
     link: "/peritajes",
-    img: "/assets/papeles.jpg"
+    img: "/assets/papeles.jpg",
+    linktext: 'Ver más de Peritajes'
   }
 ];
 
@@ -69,7 +73,7 @@ const SliderServices = () => {
                         </div>
                         <h3 className="text-lg font-semibold mb-2">{service.title}</h3>
                         <p className="text-sm mb-4 flex-grow ">{service.description}</p>
-                        <a href={service.link} className="text-main-100 font-bold underline mt-auto mb-4">Más información</a>
+                        <a href={service.link} className="text-main-100 font-bold underline mt-auto mb-4">{service.linktext}</a>
                     </div>
                 </SwiperSlide>
             ))}
