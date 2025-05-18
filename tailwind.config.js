@@ -54,7 +54,7 @@ module.exports = {
   			}
   		},
       backgroundImage: {
-        banner: "url('/assets/house-banner.jpg')"
+        banner: "url('/assets/house-banner.webp')"
       },
       
   		boxShadow: {
