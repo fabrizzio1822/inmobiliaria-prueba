@@ -40,6 +40,7 @@ export default function FloatedSearch() {
         <button 
           type='submit'
           className="gap-4 border-[1px] rounded-lg px-14 py-5 bg-main-100 flex items-center text-white justify-center cursor-pointer m-auto hover:bg-black"
+          aria-label='buscar'
         >
           <RiSearch2Line />
           {/* Podrías agregar texto al botón si lo deseas, ej: <span className="ml-2 md:hidden lg:inline">Buscar</span> */}
