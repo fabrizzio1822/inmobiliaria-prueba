@@ -39,7 +39,7 @@ export default async function SearchResultsPage({ searchParams }) {
   }
 
   return (
-    <div className="container mx-auto px-6 my-5 py-4 min-h-screen">
+    <div className="container mx-auto px-6 my-5 py-4 ">
       {/* Puedes incluir el formulario de búsqueda aquí también para nuevas búsquedas */}
       <div className="mb-8">
         <h2 className="text-xl font-semibold text-gray-700 mb-4 text-center">Realizar una nueva búsqueda</h2>
@@ -57,7 +57,7 @@ export default async function SearchResultsPage({ searchParams }) {
       )}
 
       {!error && properties.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="min-h-screen grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {properties.map((property) => (
            <div key={property.id} className="border rounded-lg shadow-lg overflow-hidden flex flex-col bg-white min-h-[500px]">
           <Link href={`/propiedades/${property.id}`} className="flex flex-col h-full group">
