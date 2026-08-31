@@ -1,25 +1,43 @@
 import { fetchTokkoPropertyById } from "@/lib/tokkoApi";
-// import Image from "next/image"; // No se usa directamente, PhotoSlider lo maneja
-import { LiaBathSolid, LiaBedSolid, LiaRulerCombinedSolid, LiaTagSolid } from "react-icons/lia";
+import Image from "next/image";
 import { TfiLocationPin } from "react-icons/tfi";
-import { FiPhone, FiMail, FiUser } from "react-icons/fi"; // Iconos para contacto
-import PhotoSlider from "@/components/PhotoSlider/PhotoSlider";
+import { FiUser } from "react-icons/fi";
 import React from "react";
+import Script from "next/script";
 
-import { Badge } from "@/components/ui/badge"; // Asumo que es de shadcn/ui o similar
-import Form from "@/components/Form/Form";
 import { TransitionPage } from "@/components/TransitionPage";
 
+import PropertyGallery from "@/components/PropertyGallery/PropertyGallery";
+import ShareSaveActions from "@/components/ShareSaveActions/ShareSaveActions";
+import { PiWavesLight, PiMountainsLight } from "react-icons/pi"; // Ejemplo de iconos, o usar los genéricos
 
-// Helper para limpiar la descripción y manejar el HTML si es necesario
 const RichTextRenderer = ({ htmlContent }) => {
-
   if (typeof htmlContent === 'string') {
-    return <div dangerouslySetInnerHTML={{ __html: htmlContent }} className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none text-gray-700" />;
+    return <div dangerouslySetInnerHTML={{ __html: htmlContent }} className="prose prose-sm md:prose-base max-w-none text-gray-800 leading-relaxed" />;
   }
-  return <p className="text-gray-700">{htmlContent}</p>;
+  return <p className="text-gray-800 leading-relaxed">{htmlContent}</p>;
 };
 
+export async function generateMetadata({ params }) {
+  const property = await fetchTokkoPropertyById(params.id);
+  
+  if (!property) {
+    return { title: 'Propiedad no encontrada | Inmobiliaria María Laura Bobadilla' };
+  }
+
+  const title = property.publication_title || `${property.type?.name || "Propiedad"} en ${property.location?.name || "Neuquén"}`;
+  const bedrooms = property.suite_amount > 0 ? ` - ${property.suite_amount} dorm` : '';
+  const priceInfo = property.operations?.[0]?.prices?.[0];
+  const priceText = priceInfo ? ` - ${priceInfo.currency} ${priceInfo.price.toLocaleString('es-AR', {minimumFractionDigits: 0})}` : '';
+  
+  return {
+    title: `${title}${bedrooms}${priceText} | Inmobiliaria Bobadilla`,
+    description: property.description_only ? property.description_only.substring(0, 150) + '...' : `Descubre esta excelente propiedad.`,
+    alternates: {
+      canonical: `https://www.marialaurabobadilla.com.ar/propiedades/${params.id}`,
+    }
+  }
+}
 
 export default async function Propiedad({ params }) {
   const property = await fetchTokkoPropertyById(params.id);
@@ -32,209 +50,200 @@ export default async function Propiedad({ params }) {
     );
   }
 
-  // Determinar la superficie a mostrar
   let displaySurface = "N/D";
   if (parseFloat(property.roofed_surface) > 0) {
-    displaySurface = `${property.roofed_surface} m² (cubierta)`;
+    displaySurface = property.roofed_surface;
   } else if (parseFloat(property.total_surface) > 0) {
-    displaySurface = `${property.total_surface} m² (total)`;
+    displaySurface = property.total_surface;
   } else if (parseFloat(property.surface) > 0) {
-    displaySurface = `${property.surface} m²`;
+    displaySurface = property.surface;
   }
 
-  const operationType = property.operations?.[0]?.operation_type;
   const priceInfo = property.operations?.[0]?.prices?.[0];
+  const title = property.publication_title || `${property.type?.name || "Propiedad"} en ${property.location?.name || "Ubicación"}`;
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": title,
+    "description": property.description_only,
+    "image": property.photos?.map(p => p.image) || [],
+    "offers": {
+      "@type": "Offer",
+      "priceCurrency": priceInfo?.currency || "USD",
+      "price": priceInfo?.price || 0,
+      "url": `https://www.marialaurabobadilla.com.ar/propiedades/${params.id}`
+    }
+  };
 
   return (
-    <div>
+    <div className="bg-white min-h-screen">
+      <Script id="json-ld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <TransitionPage/>
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Encabezado de la Propiedad */}
+      
+      <main className="w-full px-4 sm:px-6 lg:px-12 py-8 md:py-12">
+        
+        {/* Galería (Ancho casi completo, sin border-radius agresivo en el diseño de referencia) */}
         <div className="mb-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-2">
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 leading-tight">
-              {property.publication_title || `${property.type?.name || "Propiedad"} en ${property.location?.name || "Ubicación"}`}
-            </h1>
-            {operationType && (
-              <Badge 
-                className="max-w-[70px] text-center text-sm font-semibold whitespace-nowrap bg-main-100 text-white" // Ajusta bg-bordo
-              >
-                {operationType}
-              </Badge>
-            )}
-          </div>
-          <div className="flex items-center text-gray-600 text-sm sm:text-base">
-            <TfiLocationPin className="mr-2 text-bordo" size={20} /> 
-            <span>{property.address || property.location?.full_location || "Ubicación no especificada"}</span>
-          </div>
+          <PropertyGallery photos={property.photos} location={property.location?.name} />
         </div>
 
-        {/* Layout Principal: Galería y Detalles */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Columna Izquierda (Galería y Descripción) */}
-          <div className="lg:col-span-2">
-            {property.photos && property.photos.length > 0 ? (
-              <div className="mb-6 rounded-lg overflow-hidden ">
-                <PhotoSlider photos={property.photos} />
+        {/* Layout Principal 2 Columnas */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 relative mt-10">
+          
+          {/* Columna Izquierda (Acciones, Precio, Contacto) */}
+          <div className="flex flex-col">
+            
+            {/* Top: Save & Share */}
+            <div className="mb-6 flex items-center h-6">
+               <ShareSaveActions propertyTitle={title} />
+            </div>
+
+            {/* Título de la Propiedad */}
+            <div className="mb-4">
+              <h1 className="text-2xl lg:text-3xl font-bold text-gray-900 leading-tight">
+                {title}
+              </h1>
+            </div>
+
+            {/* Precio */}
+            <div className="mb-10">
+              {priceInfo?.price ? (
+                <>
+                  <h2 className="text-4xl lg:text-5xl font-bold text-main-100 tracking-tight">
+                    {priceInfo.currency === 'USD' ? 'US$' : '$'} {priceInfo.price.toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                  </h2>
+                  <a href="#contacto" className="inline-block mt-3 text-sm font-semibold text-main-100 underline underline-offset-4 decoration-2 decoration-main-100 hover:text-main-200">
+                    Consultar financiación
+                  </a>
+                </>
+              ) : (
+                <h2 className="text-4xl font-bold text-gray-900 tracking-tight">Consultar precio</h2>
+              )}
+            </div>
+
+            {/* Tarjeta de Contacto Minimalista (alineada a la izquierda) */}
+            <div className="bg-white rounded-lg shadow-[0_4px_20px_rgb(0,0,0,0.06)] p-3 lg:p-4 border border-gray-100 flex items-center justify-between max-w-sm mt-4">
+              <div className="flex items-center gap-3">
+                {property.producer?.picture ? (
+                  <div className="w-10 h-10 rounded overflow-hidden relative border border-gray-100 shrink-0">
+                    <Image src={property.producer.picture} alt="Agente" fill className="object-cover" />
+                  </div>
+                ) : (
+                  <div className="w-10 h-10 rounded bg-gray-50 flex items-center justify-center text-gray-400 border border-gray-100 shrink-0">
+                    <FiUser size={20}/>
+                  </div>
+                )}
+                <div className="flex flex-col">
+                  <span className="text-[11px] text-gray-500 font-medium uppercase tracking-wide">Agente inmobiliario</span>
+                  <span className="text-sm font-bold text-gray-900 leading-none mt-0.5">{property.producer?.name || 'Inmobiliaria'}</span>
+                </div>
               </div>
-            ) : (
-              <div className="mb-6 w-full h-96 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500 shadow-lg">
-                No hay imágenes disponibles
+              
+              <a
+                href={`https://wa.me/5492990000000?text=${encodeURIComponent(`¡Hola! Consulto por la propiedad: ${title} (ID: ${params.id})`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-main-100 text-white text-xs font-semibold py-2.5 px-4 rounded hover:bg-main-200 transition-colors shadow-sm"
+              >
+                Contactar
+              </a>
+            </div>
+
+          </div>
+
+          {/* Columna Derecha (Ubicación, Specs, Amenities, Descripción) */}
+          <div className="flex flex-col">
+            
+            {/* Top: Ubicación (Alineado con Save/Share) */}
+            <div className="mb-6 flex items-center h-6 text-gray-800 text-sm font-medium">
+              <TfiLocationPin className="mr-1.5" size={16} /> 
+              <span>{property.location?.name || property.address || "Ubicación"}</span>
+            </div>
+
+            {/* Specs en línea grandes */}
+            <div className="flex flex-wrap items-baseline gap-x-6 gap-y-2 mb-4">
+              {displaySurface !== "N/D" && (
+                <div className="flex items-baseline gap-1">
+                  <span className="text-4xl lg:text-4xl font-bold text-gray-900">{displaySurface}</span>
+                  <span className="text-sm font-semibold text-gray-800">m²</span>
+                </div>
+              )}
+              {property.room_amount > 0 && (
+                <div className="flex items-baseline gap-1">
+                  <span className="text-4xl lg:text-4xl font-bold text-gray-900">{property.room_amount}</span>
+                  <span className="text-sm font-semibold text-gray-800">ambientes</span>
+                </div>
+              )}
+              {property.suite_amount > 0 && (
+                <div className="flex items-baseline gap-1">
+                  <span className="text-4xl lg:text-4xl font-bold text-gray-900">{property.suite_amount}</span>
+                  <span className="text-sm font-semibold text-gray-800">dorm.</span>
+                </div>
+              )}
+              {property.bathroom_amount > 0 && (
+                <div className="flex items-baseline gap-1">
+                  <span className="text-4xl lg:text-4xl font-bold text-gray-900">{property.bathroom_amount}</span>
+                  <span className="text-sm font-semibold text-gray-800">baños</span>
+                </div>
+              )}
+            </div>
+
+            <a href="#caracteristicas" className="inline-block text-sm font-semibold text-main-100 underline underline-offset-4 decoration-2 decoration-main-100 hover:text-main-200 mb-8">
+              Ver todas las especificaciones
+            </a>
+
+            {/* Amenities Inline (Badges) */}
+            {property.tags && property.tags.length > 0 && (
+              <div className="flex flex-wrap items-center gap-3 mb-8">
+                {property.tags.map((tag, idx) => (
+                  <div key={tag.id || idx} className="bg-main-100/10 text-main-100 border border-main-100/20 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">
+                    {tag.name}
+                  </div>
+                ))}
               </div>
             )}
 
-            {/* Características Principales Iconos */}
-            <div className="mb-6 p-4  rounded-lg ">
-              <h3 className="text-lg font-semibold text-gray-700 mb-3">Características Principales</h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 text-sm">
-                {property.type?.name && (
-                   <div className="flex items-center text-gray-600">
-                     <LiaTagSolid className="mr-2 text-bordo" size={20}/> {property.type.name}
-                   </div>
-                   
-                )}
-                {property.suite_amount > 0 && (
-                  <div className="flex items-center text-gray-600">
-                    <LiaBedSolid className="mr-2 text-bordo" size={20}/> {property.suite_amount} Dormitorio(s)
-                  </div>
-                )}
-                {property.bathroom_amount > 0 && (
-                  <div className="flex items-center text-gray-600">
-                    <LiaBathSolid className="mr-2 text-bordo" size={20}/> {property.bathroom_amount} Baño(s)
-                  </div>
-                )}
-                {property.room_amount > 0 && (
-                  <div className="flex items-center text-gray-600">
-                    {/* Puedes usar un ícono genérico para ambientes si lo tienes */}
-                    <LiaRulerCombinedSolid className="mr-2 text-bordo" size={20}/> {property.room_amount} Ambiente(s)
-                  </div>
-                )}
-                {displaySurface !== "N/D" && (
-                  <div className="flex items-center text-gray-600">
-                    <LiaRulerCombinedSolid className="mr-2 text-bordo" size={20}/> {displaySurface}
-                  </div>
-                )}
-                 {property.age > 0 && (
-                  <div className="flex items-center text-gray-600">
-                    {/* Icono para antigüedad */}
-                    <LiaRulerCombinedSolid className="mr-2 text-bordo" size={20}/> {property.age} años antigüedad
-                  </div>
-                )}
-              </div>
-            </div>
-            <hr />
             {/* Descripción */}
             {property.description_only && (
-              <div className="mb-6 p-4 bg-white ">
-                <h3 className="text-xl font-semibold text-gray-800 mb-3">Descripción</h3>
-                {/* Usar la descripción con HTML si existe (description_only), sino la plana */}
+              <div className="mt-2 text-justify pr-0 lg:pr-8">
                 <RichTextRenderer htmlContent={property.rich_description || property.description} />
               </div>
             )}
-            <hr />
-            {/* Otras Características / Tags */}
-            {property.tags && property.tags.length > 0 && (
-              <div className="mb-6 p-4 ">
-                <h3 className="text-xl font-semibold text-gray-800 mb-3">Comodidades y Servicios</h3>
-                <div className="flex flex-wrap gap-2">
-                  {property.tags.map((tag) => (
-                    <Badge key={tag.id} variant="outline" className="text-sm border-bordo text-bordo-dark"> {/* Ajusta colores */}
-                      {tag.name}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
 
-          {/* Columna Derecha (Precio y Contacto) */}
-          <div className="lg:col-span-1 space-y-6">
-            {/* Precio */}
-            {priceInfo?.price && (
-              <div className="p-6 bg-bordo/10 rounded-lg shadow-md text-center"> {/* Ajusta bg-bordo/10 */}
-                <p className="text-sm text-bordo-dark font-medium mb-1">{operationType || "Precio"}</p>
-                <p className="text-3xl font-bold text-bordo">
-                  {priceInfo.price.toLocaleString('es-AR', {
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0, // Sin decimales para precios grandes
-                  })}
-                  <span className="text-xl ml-1">{priceInfo.currency}</span>
-                </p>
-                {property.expenses > 0 && (
-                    <p className="text-xs text-gray-600 mt-1">
-                        Expensas: {property.expenses.toLocaleString('es-AR', { style: 'currency', currency: priceInfo.currency === 'USD' ? 'USD' : 'ARS', minimumFractionDigits: 0 })}
-                    </p>
-                )}
-              </div>
-            )}
-            
-
-            {/* Información del Agente/Productor */}
-            {property.producer && (
-              <div className="p-6 bg-white rounded-lg shadow-md">
-                <h3 className="text-lg font-semibold text-gray-700 mb-4 border-b pb-2">
-                  Publicado por
-                </h3>
-                <div className="flex items-center mb-4">
-                  {property.producer.picture ? (
-                    <img 
-                      src={property.producer.picture} 
-                      alt={`Foto de ${property.producer.name}`}
-                      className="w-16 h-16 rounded-full mr-4 object-cover"
-                    />
-                  ) : (
-                    <div className="w-16 h-16 rounded-full mr-4 bg-gray-200 flex items-center justify-center text-gray-500">
-                      <FiUser size={30}/>
-                    </div>
-                  )}
-                  <div>
-                    <p className="font-semibold text-gray-800">{property.producer.name}</p>
-                    {property.branch?.display_name && property.branch.display_name !== property.producer.name && (
-                       <p className="text-sm text-gray-500">{property.branch.display_name}</p>
+            {/* Bloque completo de especificaciones (Oculto o ancla abajo) */}
+            <div id="caracteristicas" className="mt-16 pt-8 border-t border-gray-100">
+                <h3 className="text-xl font-bold text-gray-900 mb-6">Especificaciones Técnicas</h3>
+                <div className="flex flex-col gap-y-3 text-sm max-w-xl">
+                    {property.age >= 0 && (
+                      <div className="flex justify-between py-2 border-b border-gray-100">
+                        <span className="text-gray-600 font-medium">Antigüedad</span>
+                        <span className="font-bold text-gray-900">{property.age === 0 ? 'A estrenar' : `${property.age} años`}</span>
+                      </div>
                     )}
-                  </div>
+                    {property.orientation && (
+                      <div className="flex justify-between py-2 border-b border-gray-100">
+                        <span className="text-gray-600 font-medium">Orientación</span>
+                        <span className="font-bold text-gray-900">{property.orientation}</span>
+                      </div>
+                    )}
+                    <div className="flex justify-between py-2 border-b border-gray-100">
+                        <span className="text-gray-600 font-medium">Tipo de propiedad</span>
+                        <span className="font-bold text-gray-900">{property.type?.name || 'N/A'}</span>
+                    </div>
+                    {displaySurface !== "N/D" && (
+                      <div className="flex justify-between py-2 border-b border-gray-100">
+                          <span className="text-gray-600 font-medium">Superficie Total</span>
+                          <span className="font-bold text-gray-900">{displaySurface} m²</span>
+                      </div>
+                    )}
                 </div>
-                
-                {property.producer.phone && (
-                  <a 
-                    href={`tel:${property.producer.phone.replace(/\s+/g, '')}`} 
-                    className="flex items-center text-bordo hover:text-bordo-dark mb-3 p-3 bg-bordo/5 hover:bg-bordo/10 rounded-md transition-colors"
-                  >
-                    <FiPhone className="mr-3" size={18}/> Llamar ahora
-                  </a>
-                )}
-                {property.producer.email && (
-                  <a 
-                    href={`mailto:${property.producer.email}`}
-                    className="flex items-center text-bordo hover:text-bordo-dark p-3 bg-bordo/5 hover:bg-bordo/10 rounded-md transition-colors"
-                  >
-                    <FiMail className="mr-3" size={18}/> Enviar Email
-                  </a>
-                )}
-                {/* Aquí podrías agregar un formulario de contacto simple si lo deseas */}
-              </div>
-            )}
+            </div>
 
-            <Form propertyname={property.publication_title} />
-
-             {/* Detalles Adicionales de la Sucursal (si es relevante y diferente) */}
-            {property.branch && (
-              <div className="p-4 bg-gray-50 rounded-lg shadow-sm mt-4 text-xs text-gray-600">
-                <h4 className="font-semibold mb-1">Información de la Inmobiliaria:</h4>
-                <p>{property.branch.name}</p>
-                {property.branch.address && <p>{property.branch.address}</p>}
-                {property.branch.phone && property.branch.phone !== property.producer.phone && (
-                    <p>Tel: {property.branch.phone_country_code} {property.branch.phone_area} {property.branch.phone}</p>
-                )}
-                 {property.branch.email && property.branch.email !== property.producer.email && (
-                    <p>Email: {property.branch.email}</p>
-                )}
-              </div>
-            )}
           </div>
         </div>
-      </main>
 
+      </main>
     </div>
   );
 }

@@ -1,96 +1,83 @@
 'use client';
-import { fetchTokkoProperties } from "@/lib/tokkoApi";
-import Link from "next/link";
-import { LiaBathSolid, LiaBedSolid, LiaRulerCombinedSolid } from "react-icons/lia";
-import { Location } from 'akar-icons';
-import { FaCamera } from 'react-icons/fa';
+import FeaturedPropertyCard from "../PropertyCard/FeaturedPropertyCard";
+import Link from 'next/link';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
-export default async function Propiedades() {
-  const propiedades = await fetchTokkoProperties();
+export default function Propiedades({ properties = [], limit }) {
+  const propiedadesAMostrar = limit ? properties.slice(0, limit) : properties;
+
+  const filters = [
+    { name: "Casas", href: "/propiedad?type=casa" },
+    { name: "Departamentos", href: "/propiedad?type=departamento" },
+    { name: "Terrenos", href: "/propiedad?type=terreno" },
+    { name: "Venta", href: "/propiedad?operation=venta" },
+    { name: "Alquiler", href: "/propiedad?operation=alquiler" },
+  ];
 
   return (
-    <div className="grid grid-cols-1  md:grid-cols-3 gap-6 container mx-auto px-6 my-5 py-4">
-      {propiedades.map((property) => (
-        <div key={property.id} className="border rounded-lg shadow-lg overflow-hidden flex flex-col bg-white min-h-[500px]">
-          <Link href={`/propiedades/${property.id}`} className="flex flex-col h-full group">
-            <div className="relative h-60 overflow-hidden">
-              <img
-                src={property.photos?.[0]?.image || "/placeholder.jpg"}
-                alt={property.publication_title || "Imagen de la propiedad"}
-                className="w-full h-full object-cover rounded-t-lg transform group-hover:scale-105 transition-transform duration-300"
-              />
-              {/* Etiqueta de Operación (Venta/Alquiler) */}
-              {property.operations?.[0]?.operation_type && (
-                <span className="absolute top-2 left-2 bg-main-100 text-white px-3 py-1 text-xs font-semibold rounded shadow">
-                  {property.operations[0].operation_type}
-                </span>
-              )}
-              {/* Icono de la cámara y contador de fotos */}
-              {property.photos && property.photos.length > 0 && (
-                <div className="absolute bottom-2 right-2 bg-gray-900 bg-opacity-70 text-white rounded-md p-1 flex items-center text-xs">
-                  <FaCamera className="mr-1" size={14} />
-                  <span>{property.photos.length}</span>
-                </div>
-              )}
-            </div>
-            <div className="p-4 flex flex-col flex-grow">
-              <div className="flex items-center gap-1 mb-2">
-                <Location strokeWidth={2} size={18} className="text-bordo flex-shrink-0" />
-                <h2 className="text-sm text-gray-600 truncate" title={property.address}>
-                  {property.address || "Dirección no disponible"}
-                </h2>
-              </div>
-              <h3 className="text-md font-semibold text-gray-800 mb-1 min-h-[40px] group-hover:text-bordo transition-colors duration-150">
-                {property.publication_title || "Título no disponible"}
-              </h3>
-
-              {/* Precio */}
-              <p className="text-bordo font-bold text-lg mb-2">
-                {property.operations?.[0]?.prices?.[0]?.price
-                  ? `${property.operations[0].prices[0].price.toLocaleString('es-AR', {
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 0, // Sin decimales para precios grandes
-                    })} ${property.operations[0].prices[0].currency}`
-                  : "Consultar precio"}
-              </p>
-
-              <p className="text-gray-500 text-xs mb-3 capitalize">
-                {property.type?.name || "Tipo no especificado"}
-                {property.location?.name && ` en ${property.location.name}`}
-              </p>
-
-              {/* Características */}
-              <div className="mt-auto pt-3 border-t border-gray-200">
-                <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-gray-700">
-                  {property.suite_amount > 0 && (
-                    <div className="flex items-center">
-                      <LiaBedSolid className="mr-1 text-bordo" size={16}/>
-                      <span>{property.suite_amount} Dorm.</span>
-                    </div>
-                  )}
-                  {property.bathroom_amount > 0 && (
-                    <div className="flex items-center">
-                      <LiaBathSolid className="mr-1 text-bordo" size={16}/>
-                      <span>{property.bathroom_amount} Baño(s)</span>
-                    </div>
-                  )}
-                  {(parseFloat(property.surface) > 0 || parseFloat(property.total_surface) > 0 || parseFloat(property.roofed_surface) > 0) && (
-                    <div className="flex items-center">
-                      <LiaRulerCombinedSolid className="mr-1 text-bordo" size={16}/>
-                      <span>
-                        {/* Mostrar superficie cubierta si existe, sino la total o la 'surface' */}
-                        {parseFloat(property.roofed_surface) > 0 ? property.roofed_surface :
-                          parseFloat(property.total_surface) > 0 ? property.total_surface :
-                          property.surface} m²
-                      </span>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </Link>
+    <div className="w-full px-8 my-5 py-4 relative">
+      {/* Encabezado: Badges a la izquierda */}
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-6">
+        {/* Badges de filtros rápidos */}
+        <div className="flex flex-wrap items-center justify-center sm:justify-start w-full gap-2">
+          {filters.map((filter, index) => (
+            <Link
+              key={index}
+              href={filter.href}
+              className="bg-slate-900/50 hover:bg-main-100 text-white text-sm font-medium px-4 py-1.5 rounded-full transition-colors shadow-sm"
+            >
+              {filter.name}
+            </Link>
+          ))}
         </div>
-      ))}
+      </div>
+
+      {/* Grilla de propiedades (Desktop: 4x2) */}
+      <div className="hidden lg:grid lg:grid-cols-4 gap-6">
+        {propiedadesAMostrar.map((property) => (
+          <div key={property.id} className="h-full">
+            <FeaturedPropertyCard property={property} />
+          </div>
+        ))}
+      </div>
+
+      {/* Carrusel de propiedades (Mobile/Tablet) */}
+      <div className="block lg:hidden relative">
+        <Swiper
+          modules={[Navigation]}
+          navigation={{
+            prevEl: '.swiper-button-prev-mobile',
+            nextEl: '.swiper-button-next-mobile',
+          }}
+          spaceBetween={16}
+          slidesPerView={1}
+          breakpoints={{
+            640: { slidesPerView: 2, spaceBetween: 24 },
+            768: { slidesPerView: 2, spaceBetween: 24 },
+          }}
+          className="pb-4"
+        >
+          {propiedadesAMostrar.map((property) => (
+            <SwiperSlide key={property.id} className="h-auto">
+              <FeaturedPropertyCard property={property} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        
+        {/* Controles de navegación personalizados debajo del carrusel */}
+        <div className="flex justify-center gap-4 mt-6">
+          <button className="swiper-button-prev-mobile w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 hover:bg-main-100 hover:text-white transition-all shadow-sm text-gray-700 focus:outline-none">
+            <FaArrowLeft size={16} />
+          </button>
+          <button className="swiper-button-next-mobile w-12 h-12 flex items-center justify-center rounded-full bg-gray-100 hover:bg-main-100 hover:text-white transition-all shadow-sm text-gray-700 focus:outline-none">
+            <FaArrowRight size={16} />
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

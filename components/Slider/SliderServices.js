@@ -1,3 +1,4 @@
+'use client'
 // Definición del objeto de servicios
 const services = [
   {
@@ -66,8 +67,9 @@ const SliderServices = () => {
                             <Image 
                                 src={service.img} 
                                 alt={service.title} 
-                                layout="fill" 
-                                objectFit="cover"
+                                fill
+                                sizes="(max-width: 768px) 100vw, 400px"
+                                style={{ objectFit: 'cover' }}
                                 className="rounded mb-4"
                             />
                         </div>

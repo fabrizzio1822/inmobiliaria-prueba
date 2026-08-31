@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { LiaBathSolid, LiaBedSolid, LiaRulerCombinedSolid } from "react-icons/lia";
 import { Location } from 'akar-icons'; // Asegúrate que este ícono esté disponible o reemplázalo
 import SearchForm from "@/components/SearchForm/SearchForm"; // Para mostrar el formulario también en esta página
@@ -62,10 +63,13 @@ export default async function SearchResultsPage({ searchParams }) {
            <div key={property.id} className="border rounded-lg shadow-lg overflow-hidden flex flex-col bg-white min-h-[500px]">
           <Link href={`/propiedades/${property.id}`} className="flex flex-col h-full group">
             <div className="relative h-60 overflow-hidden">
-              <img
+              <Image
                 src={property.photos?.[0]?.image || "/placeholder.jpg"}
                 alt={property.publication_title || "Imagen de la propiedad"}
-                className="w-full h-full object-cover rounded-t-lg transform group-hover:scale-105 transition-transform duration-300"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                style={{ objectFit: 'cover' }}
+                className="rounded-t-lg transform group-hover:scale-105 transition-transform duration-300"
               />
               {/* Etiqueta de Operación (Venta/Alquiler) */}
               {property.operations?.[0]?.operation_type && (

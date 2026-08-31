@@ -1,12 +1,24 @@
 'use client';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import { Navbar } from '../Navbar/Navbar';
-import { Menu, X } from 'lucide-react'; // Importa los iconos de Lucide
+import { Menu, X } from 'lucide-react';
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+  const isHomePage = pathname === '/';
+
+  // Prevenir el scroll del body cuando el menú está abierto
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [menuOpen]);
 
   const handleMenuClick = () => {
     setMenuOpen(!menuOpen);
@@ -17,121 +29,125 @@ export function Header() {
   };
 
   return (
-    <header className="bg-white relative top-0 z-50">
-      <div className="xl:container mx-auto p-3 ">
-        <div className="flex  items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex-shrink-0">
-            <Image
-              src="/assets/logo1.png"
-              width={310}
-              height={90} // Ajusté la altura para mantener la proporción
-              alt="Logo"
-              className="max-w-[70vw] sm:max-w-[270px] lg:max-w-[310px]"
-            />
-          </Link>
-          <Navbar />
-          {/* Menú principal (oculto en móviles) */}
-          <div className="hidden lg:flex items-center gap-5">
-
-            <Link
-              href="/contactame"
-              className="px-3 py-2 text-white rounded-lg bg-main-100 hover:bg-main-200"
-            >
-              Contactame
+    <>
+      <header className={`w-full z-40 ${isHomePage ? 'absolute top-0 left-0 bg-transparent' : 'relative bg-white shadow-sm'}`}>
+        <div className="mx-auto py-2 px-6 md:px-10">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <Link href="/" className="flex-shrink-0 relative z-50">
+              <Image
+                src="/assets/logo1.png"
+                width={310}
+                height={90}
+                alt="Logo"
+                className={`transition-all duration-300 max-w-[180px] sm:max-w-[270px] lg:max-w-[250px] ${isHomePage ? 'brightness-0 invert' : ''} ${menuOpen ? 'opacity-0' : 'opacity-100'}`}
+              />
             </Link>
-          </div>
-
-          {/* Botón Menú Hamburguesa (visible en móviles) */}
-          <button
-            onClick={handleMenuClick}
-            className="lg:hidden text-gray-700 hover:text-gray-900 focus:outline-none focus:shadow-outline-primary"
-            aria-label="Menú"
-            aria-expanded={menuOpen}
-          >
-            {menuOpen ? (
-              <X className="h-6 w-6 sm:h-8 sm:w-8" />
-            ) : (
-              <Menu className="h-6 w-6 sm:h-8 sm:w-8" />
-            )}
-          </button>
-        </div>
-
-        {/* Menú desplegable responsivo */}
-        <div
-          className={`lg:hidden absolute top-full left-0 w-full bg-white transition-all duration-500 overflow-hidden ${
-            menuOpen ? 'min-h-screen py-4' : 'max-h-0'
-          }`}
-        >
-          <ul className="px-4">
-            <li>
-              <Link href="/" className="block py-2 text-lg text-gray-800 hover:bg-gray-100" onClick={closeMenu}>
-                Inicio
-              </Link>
-            </li>
-            <li className="mt-2">
-              <span className="text-sm text-gray-500">Servicios Inmobiliarios</span>
-              <hr className="my-1" />
-            </li>
-            <li>
-              <Link
-                href="/servicios-inmobiliarios/asesoramiento"
-                className="block py-2 text-lg text-gray-800 hover:bg-gray-100 ml-2"
-                onClick={closeMenu}
-              >
-                Asesoramiento compra y venta
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/servicios-inmobiliarios/evaluacion"
-                className="block py-2 text-lg text-gray-800 hover:bg-gray-100 ml-2"
-                onClick={closeMenu}
-              >
-                Evaluación de proyectos
-              </Link>
-            </li>
-            <li className="mt-2">
-              <span className="text-sm text-gray-500">Otros Servicios</span>
-              <hr className="my-1" />
-            </li>
-            <li>
-              <Link href="/peritajes" className="block py-2 text-lg text-gray-800 hover:bg-gray-100 ml-2" onClick={closeMenu}>
-                Peritajes
-              </Link>
-            </li>
-            <li>
-              <Link href="/tasaciones" className="block py-2 text-lg text-gray-800 hover:bg-gray-100 ml-2" onClick={closeMenu}>
-                Tasaciones
-              </Link>
-            </li>
-            <li className="mt-2">
-              <span className="text-sm text-gray-500"></span>
-              <hr className="my-1" />
-            </li>
-            <li>
-              <Link href="/propiedad" className="block py-2 text-lg text-gray-800 hover:bg-gray-100" onClick={closeMenu}>
-                Propiedades
-              </Link>
-            </li>
-            <li>
-              <Link href="/alquileres" className="block py-2 text-lg text-gray-800 hover:bg-gray-100" onClick={closeMenu}>
-                Alquileres
-              </Link>
-            </li>
-            <hr className="my-2" />
-            <li>
+            <Navbar theme={isHomePage ? "light" : "dark"} />
+            
+            {/* Menú principal (oculto en móviles) */}
+            <div className="hidden lg:flex items-center gap-5">
               <Link
                 href="/contactame"
-                className="block py-2 text-lg bg-main-100 px-4 text-white rounded-3xl inline-block mt-2"
-                onClick={closeMenu}
+                className={`px-4 py-2 rounded-lg transition-colors duration-300 ${
+                  isHomePage
+                    ? 'text-white bg-transparent border border-white hover:bg-main-100 hover:border-main-100'
+                    : 'text-white bg-main-100 hover:bg-main-200'
+                }`}
               >
                 Contactame
               </Link>
-            </li>
-          </ul>
+            </div>
+
+            {/* Botón Menú Hamburguesa (visible en móviles) */}
+            <button
+              onClick={handleMenuClick}
+              className={`lg:hidden relative z-50 hover:opacity-80 focus:outline-none ${isHomePage ? 'text-white' : 'text-gray-900'}`}
+              aria-label="Menú"
+              aria-expanded={menuOpen}
+            >
+              {menuOpen ? (
+                <X className="h-8 w-8 text-gray-900" />
+              ) : (
+                <Menu className={`h-8 w-8 ${isHomePage ? 'text-white' : 'text-gray-900'}`} />
+              )}
+            </button>
+          </div>
         </div>
+      </header>
+
+      {/* Menú Full Screen */}
+      <div 
+        className={`fixed inset-0 z-40 bg-white transition-all duration-500 ease-in-out lg:hidden flex flex-col justify-center items-center ${
+          menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
+        }`}
+      >
+        <ul className="w-full px-8 text-center flex flex-col items-center justify-center h-full">
+          <li className="w-full mb-4">
+            <Link href="/" className="block py-3 text-2xl font-semibold text-gray-900 hover:text-main-100 transition-colors" onClick={closeMenu}>
+              Inicio
+            </Link>
+          </li>
+          <li className="w-full mt-6 mb-4">
+            <span className="text-sm font-medium text-gray-400 uppercase tracking-widest">Servicios Inmobiliarios</span>
+          </li>
+          <li className="w-full mb-3">
+            <Link
+              href="/servicios-inmobiliarios/asesoramiento"
+              className="block py-2 text-xl font-medium text-gray-700 hover:text-main-100 transition-colors"
+              onClick={closeMenu}
+            >
+              Asesoramiento
+            </Link>
+          </li>
+          <li className="w-full mb-3">
+            <Link
+              href="/servicios-inmobiliarios/evaluacion"
+              className="block py-2 text-xl font-medium text-gray-700 hover:text-main-100 transition-colors"
+              onClick={closeMenu}
+            >
+              Evaluación de proyectos
+            </Link>
+          </li>
+          <li className="w-full mb-3">
+            <Link href="/peritajes" className="block py-2 text-xl font-medium text-gray-700 hover:text-main-100 transition-colors" onClick={closeMenu}>
+              Peritajes
+            </Link>
+          </li>
+          <li className="w-full mb-6">
+            <Link href="/tasaciones" className="block py-2 text-xl font-medium text-gray-700 hover:text-main-100 transition-colors" onClick={closeMenu}>
+              Tasaciones
+            </Link>
+          </li>
+          <li className="w-full mt-4 mb-4">
+            <span className="text-sm font-medium text-gray-400 uppercase tracking-widest">Inmuebles</span>
+          </li>
+          <li className="w-full mb-3">
+            <Link href="/ventas" className="block py-2 text-xl font-medium text-gray-700 hover:text-main-100 transition-colors" onClick={closeMenu}>
+              Venta
+            </Link>
+          </li>
+          <li className="w-full mb-3">
+            <Link href="/alquileres" className="block py-2 text-xl font-medium text-gray-700 hover:text-main-100 transition-colors" onClick={closeMenu}>
+              Alquiler
+            </Link>
+          </li>
+          <li className="w-full mb-8">
+            <Link href="/propiedad" className="block py-2 text-xl font-medium text-gray-700 hover:text-main-100 transition-colors" onClick={closeMenu}>
+              Ver todas
+            </Link>
+          </li>
+          <li className="w-full mt-auto mb-10">
+            <Link
+              href="/contactame"
+              className="block w-full py-4 text-xl font-semibold bg-main-100 text-white rounded-xl shadow-lg hover:bg-main-200 transition-all"
+              onClick={closeMenu}
+            >
+              Contactame
+            </Link>
+          </li>
+        </ul>
       </div>
-    </header>
+    </>
   );
 }

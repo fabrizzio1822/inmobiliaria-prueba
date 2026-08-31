@@ -1,0 +1,86 @@
+.animatedButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 36px;
+  border: 4px solid transparent;
+  font-size: 16px;
+  background-color: inherit;
+  border-radius: 100px;
+  font-weight: 600;
+  color: #4c002b; /* main-100 */
+  box-shadow: 0 0 0 2px #4c002b;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animatedButton svg {
+  position: absolute;
+  width: 24px;
+  fill: #4c002b;
+  z-index: 9;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.arr1 {
+  right: 16px;
+}
+
+.arr2 {
+  left: -25%;
+}
+
+.circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background-color: #4c002b;
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.text {
+  position: relative;
+  z-index: 1;
+  transform: translateX(-12px);
+  transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.animatedButton:hover {
+  box-shadow: 0 0 0 12px transparent;
+  color: #ffffff; /* White text for contrast on main-100 */
+  border-radius: 12px;
+}
+
+.animatedButton:hover .arr1 {
+  right: -25%;
+}
+
+.animatedButton:hover .arr2 {
+  left: 16px;
+}
+
+.animatedButton:hover .text {
+  transform: translateX(12px);
+}
+
+.animatedButton:hover svg {
+  fill: #ffffff;
+}
+
+.animatedButton:active {
+  scale: 0.95;
+  box-shadow: 0 0 0 4px #4c002b;
+}
+
+.animatedButton:hover .circle {
+  width: 220px;
+  height: 220px;
+  opacity: 1;
+}

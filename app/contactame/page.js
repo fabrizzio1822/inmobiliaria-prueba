@@ -1,8 +1,16 @@
-'use client';
+
 
 import Formulario from "@/components/formulario/Formulario";
 import { TransitionPage } from "@/components/TransitionPage";
 import { Phone, Envelope, Location } from 'akar-icons';
+
+export const metadata = {
+  title: 'Contacto | Inmobiliaria María Laura Bobadilla',
+  description: 'Comunícate con nosotros para consultas sobre propiedades, tasaciones o asesoramiento en Neuquén.',
+  alternates: {
+    canonical: 'https://www.marialaurabobadilla.com.ar/contactame',
+  }
+};
 
 export default function Contactame() {
   return (

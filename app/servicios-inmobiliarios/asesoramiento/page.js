@@ -5,51 +5,36 @@ import Link from "next/link";
 import { LiaBathSolid, LiaBedSolid, LiaRulerCombinedSolid } from "react-icons/lia";
 import { Location } from 'akar-icons';
 import { FaCamera } from 'react-icons/fa'; 
-import { TransitionPage } from "@/components/TransitionPage";
-export default async function Asesoramiento (){
+import ServicePageLayout from "@/components/ServicePageLayout/ServicePageLayout";
+import { servicesData } from "@/data/services";
 
+export const metadata = {
+  title: 'Asesoramiento Inmobiliario | Inmobiliaria María Laura Bobadilla',
+  description: 'Te asesoramos en la compra, venta y alquiler de propiedades para garantizar transacciones seguras y exitosas.',
+  alternates: {
+    canonical: 'https://www.marialaurabobadilla.com.ar/servicios-inmobiliarios/asesoramiento',
+  }
+};
+
+export default async function Asesoramiento (){
     const propiedades = await fetchTokkoProperties();
 
     return (
-        <div className=" container mx-auto" >
-            <TransitionPage/>
-           <div className="flex px-4 flex-col lg:flex-row sm:py-12 gap-8 md:gap-12 lg:gap-20">
-            {/* Text Content */}
-            <div className="flex flex-col justify-center flex-1">
-              <h2 className="sm:text-4xl text-2xl py-4 font-bold text-zinc-700">
-                ASESORAMIENTO INTEGRAL EN COMPRA Y VENTA DE PROPIEDADES
-              </h2>
-              <hr className="bg-main-100 max-w-sm h-[5px] my-2" /> {/* Ajusté el grosor del hr y el margen vertical */}
-              <p className="py-4 md:text-lg text-gray-700">
-                El servicio de asesoramiento en la compra y venta de propiedades desempeña un papel crucial al
-                brindar orientación especializada a clientes que buscan realizar transacciones inmobiliarias. Este
-                servicio integral, proporcionado por una profesional en bienes raíces, abarca desde la
-                identificación de oportunidades hasta la gestión de cierres exitosos.
-              </p>
-            </div>
-
-            {/* Image */}
-            <Image
-              className="rounded-xl w-full lg:max-w-md lg:max-w-lg object-cover"
-              src="/assets/planos.jpg"
-              width={700}
-              height={500}
-              alt="Planos de propiedades"
-              objectFit="cover"
-            />
-          </div>
-            <h2 className="text-3xl px-4 text-bold font-bold text-main-100 py-3">Viviendas</h2>
-            <hr className="mb-4" />
+        <ServicePageLayout serviceId="asesoramiento">
+            <h2 className="text-3xl px-4 text-bold font-bold text-main-100 py-3 container mx-auto">Viviendas en Cartera</h2>
+            <hr className="mb-4 container mx-auto" />
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 container mx-auto px-6 my-5 py-4">
             {propiedades.map((property) => (
-                 (
                   <div key={property.id} className="border rounded-lg shadow-lg overflow-hidden flex flex-col bg-white min-h-[500px]">
                         <Link href={`/propiedades/${property.id}`} className="flex flex-col h-full group">
                       <div className="relative h-60 overflow-hidden">
-                        <img
+                        <Image
                           src={property.photos?.[0]?.image || "/placeholder.jpg"}
                           alt={property.publication_title || "Imagen de la propiedad"}
-                          className="w-full h-full object-cover rounded-t-lg transform group-hover:scale-105 transition-transform duration-300"
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                          style={{ objectFit: 'cover' }}
+                          className="rounded-t-lg transform group-hover:scale-105 transition-transform duration-300"
                         />
                         {/* Etiqueta de Operación (Venta/Alquiler) */}
                         {property.operations?.[0]?.operation_type && (
@@ -122,10 +107,8 @@ export default async function Asesoramiento (){
                       </div>
                     </Link>
                   </div>
-                )
             ))}
             </div>
-
-        </div>
+        </ServicePageLayout>
     )
 }
