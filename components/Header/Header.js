@@ -40,7 +40,7 @@ export function Header() {
                 width={310}
                 height={90}
                 alt="Logo"
-                className={`transition-all duration-300 max-w-[180px] sm:max-w-[270px] lg:max-w-[250px] ${isHomePage ? '' : ''} ${menuOpen ? 'opacity-0' : 'opacity-100'}`}
+                className={`transition-all duration-300 max-w-[220px] sm:max-w-[270px] lg:max-w-[250px] ${isHomePage ? '' : ''} ${menuOpen ? 'opacity-0' : 'opacity-100'}`}
               />
             </Link>
             <Navbar theme={isHomePage ? "light" : "dark"} />
@@ -61,14 +61,14 @@ export function Header() {
             {/* Botón Menú Hamburguesa (visible en móviles) */}
             <button
               onClick={handleMenuClick}
-              className={`lg:hidden relative z-50 hover:opacity-80 focus:outline-none ${isHomePage ? 'text-white' : 'text-gray-900'}`}
+              className={`lg:hidden relative z-50 hover:opacity-80 focus:outline-none`}
               aria-label="Menú"
               aria-expanded={menuOpen}
             >
               {menuOpen ? (
                 <X className="h-8 w-8 text-white" />
               ) : (
-                <Menu className={`h-8 w-8 ${isHomePage ? 'text-white' : 'text-gray-900'}`} />
+                <Menu className={`h-8 w-8 text-main-100`} />
               )}
             </button>
           </div>
@@ -87,9 +87,9 @@ export function Header() {
           <X className="h-8 w-8" />
         </button>
         <ul className="w-full px-8 text-center flex flex-col items-center justify-center h-full">
-          <li className="w-full mb-4">
-            <Link href="/" className="block py-3 text-2xl font-semibold text-white hover:text-white/80 transition-colors" onClick={closeMenu}>
-              Inicio
+          <li className="w-full mb-4 flex justify-center">
+            <Link href="/" className="block py-3 transition-colors" onClick={closeMenu}>
+              <Image src="/assets/logo1.png" width={220} height={70} alt="Inicio" className="mx-auto" />
             </Link>
           </li>
           <li className="w-full mt-6 mb-4">
