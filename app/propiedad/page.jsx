@@ -1,8 +1,7 @@
 import { fetchTokkoProperties } from "@/lib/tokkoApi";
-import Link from "next/link";
-import PropertyCard from "@/components/PropertyCard/PropertyCard";
 import { TransitionPage } from "@/components/TransitionPage";
 import PropertyFilters from "@/components/PropertyFilters/PropertyFilters";
+import PropertiesViewToggle from "@/components/PropertiesViewToggle/PropertiesViewToggle";
 
 export const metadata = {
   title: 'Propiedades en Venta y Alquiler | Inmobiliaria María Laura Bobadilla',
@@ -18,15 +17,24 @@ export default async function PropiedadesTokko ({ searchParams }) {
 
     // Aplicar filtros en memoria basados en los searchParams de la URL
     if (searchParams.operation) {
-        propiedades = propiedades.filter(p => p.operations?.[0]?.operation_type === searchParams.operation);
+        const op = searchParams.operation.toLowerCase();
+        propiedades = propiedades.filter(p => p.operations?.[0]?.operation_type?.toLowerCase() === op);
     }
 
     if (searchParams.location) {
-        propiedades = propiedades.filter(p => p.location?.name === searchParams.location);
+        const loc = searchParams.location.toLowerCase();
+        propiedades = propiedades.filter(p => p.location?.name?.toLowerCase() === loc);
     }
     
     if (searchParams.type) {
-        propiedades = propiedades.filter(p => p.type?.name === searchParams.type);
+        const typeParam = searchParams.type.toLowerCase();
+        propiedades = propiedades.filter(p => {
+            const pType = p.type?.name?.toLowerCase() || '';
+            if (typeParam === 'terreno' || typeParam === 'lote') {
+                return pType.includes('terreno') || pType.includes('lote');
+            }
+            return pType.includes(typeParam);
+        });
     }
     
     if (searchParams.rooms) {
@@ -35,27 +43,16 @@ export default async function PropiedadesTokko ({ searchParams }) {
     }
 
     return (
-        <div className=" container mx-auto" >
+        <div className="container mx-auto">
            <TransitionPage/>
             <h1 className="text-3xl font-bold text-center mt-8 mb-6">Propiedades</h1>
             
             {/* Componente de Filtros */}
-            <div className="max-w-6xl mx-auto px-4">
+            <div className="max-w-6xl mx-auto px-4 mb-6">
               <PropertyFilters />
             </div>
 
-            {propiedades.length === 0 ? (
-               <div className="text-center py-20 text-gray-500 text-xl">
-                 No se encontraron propiedades con esos filtros.
-               </div>
-            ) : (
-               <div className="grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 gap-6 container mx-auto px-6 mb-10 py-4">
-               {propiedades.map((property) => (
-                  <PropertyCard key={property.id} property={property} />
-               ))}
-            </div>
-            )}
-
+            <PropertiesViewToggle properties={propiedades} />
         </div>
     )
 }

@@ -2,18 +2,7 @@ import React, { useState, useRef } from 'react';
 import { dataHeader } from '../Header/Header.data';
 import Link from 'next/link';
 import { GrFormDown, GrFormUp } from 'react-icons/gr';
-import { FiChevronRight, FiBriefcase, FiTrendingUp, FiTarget, FiFileText } from 'react-icons/fi';
-
-// Mapeo simple de iconos según el iconName que pusimos en Header.data.ts
-const getIcon = (iconName) => {
-    switch (iconName) {
-        case 'asesoramiento': return <FiBriefcase size={18} />;
-        case 'evaluacion': return <FiTrendingUp size={18} />;
-        case 'tasacion': return <FiTarget size={18} />;
-        case 'peritaje': return <FiFileText size={18} />;
-        default: return <FiBriefcase size={18} />;
-    }
-};
+import { FiChevronRight } from 'react-icons/fi';
 
 export function Navbar({ theme = 'dark' }) {
     const [submenuOpenId, setSubmenuOpenId] = useState(null);
@@ -70,21 +59,13 @@ export function Navbar({ theme = 'dark' }) {
                         >
                             {submenu.map(subItem => (
                                 <Link key={subItem.id} href={subItem.link} className="group flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 transition-all duration-200">
-                                    {/* Contenedor del Icono */}
-                                    <div className="flex-shrink-0 w-11 h-11 rounded-[10px] bg-gray-50 border border-gray-100 flex items-center justify-center text-main-100 group-hover:bg-white group-hover:shadow-sm group-hover:border-gray-200 transition-all">
-                                        {getIcon(subItem.iconName)}
-                                    </div>
-                                    
-                                    {/* Textos */}
                                     <div className="flex flex-col flex-grow">
                                         <span className="text-sm font-semibold text-gray-900">{subItem.name}</span>
                                         {subItem.description && (
                                             <span className="text-xs text-gray-500 mt-0.5 leading-snug">{subItem.description}</span>
                                         )}
                                     </div>
-
-                                    {/* Flecha derecha */}
-                                    <div className="text-gray-300 group-hover:text-main-100 group-hover:translate-x-1 transition-all pr-1">
+                                    <div className="flex-shrink-0 text-gray-300 group-hover:text-main-100 group-hover:translate-x-1 transition-all pr-1">
                                         <FiChevronRight size={18} strokeWidth={2.5} />
                                     </div>
                                 </Link>

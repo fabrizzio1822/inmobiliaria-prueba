@@ -11,7 +11,7 @@ export default function FeaturedPropertyCard({ property }) {
   const operationType = property.operations?.[0]?.operation_type || '';
   const priceObj = property.operations?.[0]?.prices?.[0];
   
-  const priceFormatted = priceObj?.price
+  const priceFormatted = priceObj?.price > 1
     ? `${priceObj.currency === 'USD' ? 'USD' : '$'} ${priceObj.price.toLocaleString('es-AR', {
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,

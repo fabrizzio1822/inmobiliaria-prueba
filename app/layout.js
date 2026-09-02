@@ -10,27 +10,22 @@ import NavbarFixed from "@/components/Header/NavbarFixed";
 import { Toaster } from "react-hot-toast";
 import { Footer } from "@/components/Footer/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton/WhatsAppButton";
-
-// Tipografía para Títulos (Sofisticada, elegante, ideal para cursivas)
-const playfair = Playfair_Display({ 
+const playfair = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair',
   display: 'swap',
 });
-
-// Tipografía para Cuerpo (Limpia, moderna y legible)
-const montserrat = Montserrat({ 
+const montserrat = Montserrat({
   subsets: ['latin'],
   variable: '--font-montserrat',
   display: 'swap',
 });
-
 export const metadata = {
   title: 'Inmobiliaria María Laura Bobadilla | Propiedades en Neuquén y más allá',
   description:
     'Encuentra tu hogar ideal con la Inmobiliaria de María Laura Bobadilla en Neuquén, Argentina. Ofrecemos compra, venta, alquiler de propiedades en diversas ubicaciones. Asesoramiento experto, tasaciones, evaluación de proyectos y peritajes inmobiliarios.',
-  authors: [{ name: 'María Laura Bobadilla', url: 'https://www.marialaurabobadilla.com.ar' }], 
-  creator: 'María Laura Bobadilla', 
+  authors: [{ name: 'María Laura Bobadilla', url: 'https://www.marialaurabobadilla.com.ar' }],
+  creator: 'María Laura Bobadilla',
   publisher: 'Inmobiliaria María Laura Bobadilla',
   robots: {
     index: true,
@@ -62,21 +57,18 @@ export const metadata = {
     }
   }
 };
-
-
-
 export default function RootLayout({ children }) {
   return (
     <html lang="es-AR">
       <body className={`${montserrat.variable} ${playfair.variable} font-sans`}>
-        <Header/>
+        <Header />
         <NavbarFixed />
-        <Toaster/>
+        <Toaster />
         {children}
         <WhatsAppButton />
-        <Footer/>
-        </body>
-        
+        <Footer />
+      </body>
+
     </html>
   );
 }

@@ -9,7 +9,7 @@ const faqs = [
   },
   {
     question: "¿En qué consiste la evaluación de proyectos inmobiliarios?",
-    answer: "Analizamos la viabilidad técnica, financiera y comercial de tu proyecto. Gracias a mi experiencia financiera y visión de negocios, te ayudo a identificar oportunidades y maximizar la rentabilidad de tu inversión."
+    answer: "Analizo la viabilidad técnica, financiera y comercial de tu proyecto. Gracias a mi experiencia financiera y visión de negocios, te ayudo a identificar oportunidades y maximizar la rentabilidad de tu inversión."
   },
   {
     question: "¿Qué diferencia hay entre una tasación y un peritaje?",
@@ -20,8 +20,8 @@ const faqs = [
     answer: "Al ser Coach Ejecutiva certificada por ICF, integro herramientas avanzadas de negociación, escucha activa y resolución de conflictos. Esto permite que transacciones que a veces son tensas o complejas se desarrollen de manera asertiva, fluida y exitosa para ambas partes."
   },
   {
-    question: "¿Qué tipos de propiedades manejan?",
-    answer: "Trabajamos con una amplia y exclusiva cartera que incluye casas, departamentos, terrenos, dúplex y desarrollos inmobiliarios, tanto para venta como para alquileres."
+    question: "¿Qué tipos de propiedades manejás?",
+    answer: "Trabajo con una amplia y exclusiva cartera que incluye casas, departamentos, terrenos, dúplex y desarrollos inmobiliarios, tanto para venta como para alquileres."
   }
 ];
 
@@ -33,46 +33,48 @@ export default function FAQ() {
   };
 
   return (
-    <section className="w-full py-16 md:py-24 bg-white">
-      <div className="max-w-[1600px] mx-auto px-4 lg:px-8">
-        <div className="flex flex-col lg:flex-row gap-12 lg:gap-24">
-          
+    <section className="w-full py-20 lg:py-32 bg-white">
+      <div className="container mx-auto px-6">
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24">
+
           {/* Título - Lado izquierdo */}
-          <div className="lg:w-1/3 flex-shrink-0">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#2A2B5E] leading-tight font-sans">
-              Preguntas <br className="hidden lg:block"/>frecuentes
+          <div className="lg:w-1/3 flex flex-col flex-shrink-0">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-gray-900 leading-tight mb-6">
+              Preguntas <br className="hidden lg:block" /><span className="text-main-100 italic">frecuentes</span>
             </h2>
+            <p className="text-gray-600 text-lg">
+              Resuelvo tus dudas principales sobre mis servicios inmobiliarios y profesionales
+            </p>
           </div>
 
           {/* Acordeón - Lado derecho */}
-          <div className="lg:w-2/3 flex flex-col gap-3">
+          <div className="lg:w-2/3 flex flex-col">
             {faqs.map((faq, index) => {
               const isOpen = openIndex === index;
               return (
-                <div 
-                  key={index} 
-                  className="rounded-xl overflow-hidden bg-[#F8F9FA] transition-all duration-300"
+                <div
+                  key={index}
+                  className="border-b border-gray-200 transition-colors duration-300"
                 >
                   <button
                     onClick={() => toggleAccordion(index)}
-                    className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
+                    className="w-full flex items-center justify-between py-6 text-left focus:outline-none group"
                   >
-                    <span className="font-semibold text-[#2A2B5E] text-base md:text-lg pr-4">
+                    <span className="font-bold text-gray-900 text-lg md:text-xl pr-4 group-hover:text-main-100 transition-colors">
                       {faq.question}
                     </span>
-                    <div className="flex-shrink-0">
-                      <FiChevronDown 
-                        className={`w-5 h-5 text-[#2A2B5E] transition-transform duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`} 
+                    <div className={`flex-shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-colors duration-300 ${isOpen ? 'bg-main-100 border-main-100 text-white' : 'border-gray-300 text-gray-400 group-hover:border-main-100 group-hover:text-main-100'}`}>
+                      <FiChevronDown
+                        className={`w-5 h-5 transition-transform duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`}
                       />
                     </div>
                   </button>
-                  
-                  <div 
-                    className={`transition-all duration-300 ease-in-out overflow-hidden ${
-                      isOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
-                    }`}
+
+                  <div
+                    className={`transition-all duration-300 ease-in-out overflow-hidden ${isOpen ? 'max-h-[500px] opacity-100 pb-6' : 'max-h-0 opacity-0'
+                      }`}
                   >
-                    <div className="p-6 pt-0 text-gray-600 text-sm md:text-base leading-relaxed">
+                    <div className="text-gray-600 text-base md:text-lg leading-relaxed max-w-3xl">
                       {faq.answer}
                     </div>
                   </div>

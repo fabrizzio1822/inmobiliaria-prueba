@@ -5,21 +5,21 @@ import { Building2, TrendingUp, Award } from 'lucide-react';
 import FloatedSearch from "../FloatedSearch/FloatedSearch";
 
 export default function Banner({ properties = [] }) {
-  // Las 3 imágenes. Por ahora la misma, luego cambian acá.
-  const images = [
-    '/assets/hero-1.jpg',
-    '/assets/hero-2.jpg',
-    '/assets/hero-3.jpg'
+  // Las imágenes para desktop y mobile
+  const slides = [
+    { desktop: '/assets/hero-4.jpg', mobile: '/assets/hero-1-mobile.jpg' },
+    { desktop: '/assets/hero-31.jpg', mobile: '/assets/hero-2-mobile.jpg' },
+    { desktop: '/assets/hero-21.jpg', mobile: '/assets/hero-3-mobile.jpg' }
   ];
 
   const [currentImage, setCurrentImage] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length);
+      setCurrentImage((prev) => (prev + 1) % slides.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [slides.length]);
 
   return (
     <div className="w-full relative mb-16 md:px-6">
@@ -29,13 +29,22 @@ export default function Banner({ properties = [] }) {
         {/* Capa de fondo separada para mantener el overflow-hidden sin recortar el buscador */}
         <div className="absolute inset-0 overflow-hidden rounded-b-[2rem] lg:rounded-b-[3rem] z-0">
           {/* Carrusel de fondos */}
-          {images.map((img, index) => (
+          {slides.map((slide, index) => (
             <div
               key={index}
-              className={`absolute inset-0 bg-no-repeat bg-cover bg-center transition-opacity duration-1000 ease-in-out ${index === currentImage ? 'opacity-100' : 'opacity-0'
-                }`}
-              style={{ backgroundImage: `url('${img}')` }}
-            />
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === currentImage ? 'opacity-100' : 'opacity-0'}`}
+            >
+              {/* Fondo Desktop */}
+              <div
+                className="hidden md:block absolute inset-0 bg-no-repeat bg-cover bg-center"
+                style={{ backgroundImage: `url('${slide.desktop}')` }}
+              />
+              {/* Fondo Mobile */}
+              <div
+                className="block md:hidden absolute inset-0 bg-no-repeat bg-cover bg-center"
+                style={{ backgroundImage: `url('${slide.mobile}')` }}
+              />
+            </div>
           ))}
 
           {/* Capa de oscurecimiento sutil para legibilidad del texto */}

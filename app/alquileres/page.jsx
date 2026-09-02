@@ -1,8 +1,7 @@
 import { fetchTokkoProperties } from "@/lib/tokkoApi";
-import Link from "next/link";
-import PropertyCard from "@/components/PropertyCard/PropertyCard";
 import { TransitionPage } from "@/components/TransitionPage";
 import PropertyFilters from "@/components/PropertyFilters/PropertyFilters";
+import PropertiesViewToggle from "@/components/PropertiesViewToggle/PropertiesViewToggle";
 
 export const metadata = {
   title: 'Alquileres de Propiedades | Inmobiliaria María Laura Bobadilla',
@@ -38,21 +37,11 @@ export default async function Alquileres({ searchParams }) {
             <h1 className="text-3xl font-bold text-center mt-8 mb-6">Alquileres</h1>
             
             {/* Componente de Filtros (fijando operación) */}
-            <div className="max-w-6xl mx-auto px-4">
+            <div className="max-w-6xl mx-auto px-4 mb-6">
               <PropertyFilters operationFixed="Alquiler" />
             </div>
 
-            {propiedades.length === 0 ? (
-               <div className="text-center py-20 text-gray-500 text-xl">
-                 No se encontraron propiedades en alquiler con esos filtros.
-               </div>
-            ) : (
-               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 container mx-auto px-6 mb-10 py-4">
-               {propiedades.map((property) => (
-                  <PropertyCard key={property.id} property={property} />
-               ))}
-               </div>
-            )}
+            <PropertiesViewToggle properties={propiedades} />
         </div>
     );
 }

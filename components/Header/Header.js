@@ -36,24 +36,23 @@ export function Header() {
             {/* Logo */}
             <Link href="/" className="flex-shrink-0 relative z-50">
               <Image
-                src="/assets/logo1.png"
+                src="/assets/logo3.png"
                 width={310}
                 height={90}
                 alt="Logo"
-                className={`transition-all duration-300 max-w-[180px] sm:max-w-[270px] lg:max-w-[250px] ${isHomePage ? 'brightness-0 invert' : ''} ${menuOpen ? 'opacity-0' : 'opacity-100'}`}
+                className={`transition-all duration-300 max-w-[180px] sm:max-w-[270px] lg:max-w-[250px] ${isHomePage ? '' : ''} ${menuOpen ? 'opacity-0' : 'opacity-100'}`}
               />
             </Link>
             <Navbar theme={isHomePage ? "light" : "dark"} />
-            
+
             {/* Menú principal (oculto en móviles) */}
             <div className="hidden lg:flex items-center gap-5">
               <Link
                 href="/contactame"
-                className={`px-4 py-2 rounded-lg transition-colors duration-300 ${
-                  isHomePage
-                    ? 'text-white bg-transparent border border-white hover:bg-main-100 hover:border-main-100'
-                    : 'text-white bg-main-100 hover:bg-main-200'
-                }`}
+                className={`px-4 py-2 rounded-lg transition-colors duration-300 ${isHomePage
+                  ? 'text-white bg-transparent border border-white hover:bg-main-100 hover:border-main-100'
+                  : 'text-white bg-main-100 hover:bg-main-200'
+                  }`}
               >
                 Contactame
               </Link>
@@ -67,7 +66,7 @@ export function Header() {
               aria-expanded={menuOpen}
             >
               {menuOpen ? (
-                <X className="h-8 w-8 text-gray-900" />
+                <X className="h-8 w-8 text-white" />
               ) : (
                 <Menu className={`h-8 w-8 ${isHomePage ? 'text-white' : 'text-gray-900'}`} />
               )}
@@ -77,24 +76,29 @@ export function Header() {
       </header>
 
       {/* Menú Full Screen */}
-      <div 
-        className={`fixed inset-0 z-40 bg-white transition-all duration-500 ease-in-out lg:hidden flex flex-col justify-center items-center ${
-          menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
-        }`}
+      <div
+        className={`fixed inset-0 z-[100] bg-main-100 transition-all duration-500 ease-in-out lg:hidden flex flex-col justify-center items-center ${menuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-full pointer-events-none'
+          }`}
       >
+        <button
+          onClick={closeMenu}
+          className="absolute top-4 right-6 p-2 text-white hover:opacity-80 focus:outline-none"
+        >
+          <X className="h-8 w-8" />
+        </button>
         <ul className="w-full px-8 text-center flex flex-col items-center justify-center h-full">
           <li className="w-full mb-4">
-            <Link href="/" className="block py-3 text-2xl font-semibold text-gray-900 hover:text-main-100 transition-colors" onClick={closeMenu}>
+            <Link href="/" className="block py-3 text-2xl font-semibold text-white hover:text-white/80 transition-colors" onClick={closeMenu}>
               Inicio
             </Link>
           </li>
           <li className="w-full mt-6 mb-4">
-            <span className="text-sm font-medium text-gray-400 uppercase tracking-widest">Servicios Inmobiliarios</span>
+            <span className="text-sm font-medium text-white/60 uppercase tracking-widest">Servicios Inmobiliarios</span>
           </li>
           <li className="w-full mb-3">
             <Link
               href="/servicios-inmobiliarios/asesoramiento"
-              className="block py-2 text-xl font-medium text-gray-700 hover:text-main-100 transition-colors"
+              className="block py-2 text-xl font-medium text-white/90 hover:text-white transition-colors"
               onClick={closeMenu}
             >
               Asesoramiento
@@ -103,44 +107,44 @@ export function Header() {
           <li className="w-full mb-3">
             <Link
               href="/servicios-inmobiliarios/evaluacion"
-              className="block py-2 text-xl font-medium text-gray-700 hover:text-main-100 transition-colors"
+              className="block py-2 text-xl font-medium text-white/90 hover:text-white transition-colors"
               onClick={closeMenu}
             >
               Evaluación de proyectos
             </Link>
           </li>
           <li className="w-full mb-3">
-            <Link href="/peritajes" className="block py-2 text-xl font-medium text-gray-700 hover:text-main-100 transition-colors" onClick={closeMenu}>
+            <Link href="/peritajes" className="block py-2 text-xl font-medium text-white/90 hover:text-white transition-colors" onClick={closeMenu}>
               Peritajes
             </Link>
           </li>
           <li className="w-full mb-6">
-            <Link href="/tasaciones" className="block py-2 text-xl font-medium text-gray-700 hover:text-main-100 transition-colors" onClick={closeMenu}>
+            <Link href="/tasaciones" className="block py-2 text-xl font-medium text-white/90 hover:text-white transition-colors" onClick={closeMenu}>
               Tasaciones
             </Link>
           </li>
           <li className="w-full mt-4 mb-4">
-            <span className="text-sm font-medium text-gray-400 uppercase tracking-widest">Inmuebles</span>
+            <span className="text-sm font-medium text-white/60 uppercase tracking-widest">Inmuebles</span>
           </li>
           <li className="w-full mb-3">
-            <Link href="/ventas" className="block py-2 text-xl font-medium text-gray-700 hover:text-main-100 transition-colors" onClick={closeMenu}>
+            <Link href="/ventas" className="block py-2 text-xl font-medium text-white/90 hover:text-white transition-colors" onClick={closeMenu}>
               Venta
             </Link>
           </li>
           <li className="w-full mb-3">
-            <Link href="/alquileres" className="block py-2 text-xl font-medium text-gray-700 hover:text-main-100 transition-colors" onClick={closeMenu}>
+            <Link href="/alquileres" className="block py-2 text-xl font-medium text-white/90 hover:text-white transition-colors" onClick={closeMenu}>
               Alquiler
             </Link>
           </li>
           <li className="w-full mb-8">
-            <Link href="/propiedad" className="block py-2 text-xl font-medium text-gray-700 hover:text-main-100 transition-colors" onClick={closeMenu}>
+            <Link href="/propiedad" className="block py-2 text-xl font-medium text-white/90 hover:text-white transition-colors" onClick={closeMenu}>
               Ver todas
             </Link>
           </li>
           <li className="w-full mt-auto mb-10">
             <Link
               href="/contactame"
-              className="block w-full py-4 text-xl font-semibold bg-main-100 text-white rounded-xl shadow-lg hover:bg-main-200 transition-all"
+              className="block w-full py-4 text-xl font-semibold bg-white text-main-100 rounded-xl shadow-lg hover:bg-gray-100 transition-all"
               onClick={closeMenu}
             >
               Contactame
