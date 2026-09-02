@@ -113,7 +113,7 @@ export default function PropertyCard({ property, layout = 'grid' }) {
   const handleWhatsApp = (e) => {
     e.preventDefault();
     const message = `Hola, quiero consultar por la propiedad "${property.publication_title || property.address}" (Ref: ${property.reference_code || property.id}).`;
-    window.open(`https://wa.me/5492990000000?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/5492994213223?text=${encodeURIComponent(message)}`, '_blank');
   };
 
   const handleContact = (e) => {

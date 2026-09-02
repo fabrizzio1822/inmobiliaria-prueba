@@ -21,7 +21,7 @@ export default function ServicePageLayout({ serviceId, children }) {
     "/assets/papeles.jpg"
   ];
 
-  const whatsappHref = `https://wa.me/5492990000000?text=${encodeURIComponent(
+  const whatsappHref = `https://wa.me/5492994213223?text=${encodeURIComponent(
     service.whatsappMessage ?? ''
   )}`;
 

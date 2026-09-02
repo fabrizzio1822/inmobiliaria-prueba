@@ -248,8 +248,6 @@ export default async function Propiedad({ params }) {
                  <ShareSaveActions propertyTitle={title} />
               </div>
 
-
-
               {/* Tarjeta de Contacto */}
               <div className="bg-white rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] p-6 border border-gray-100 flex flex-col gap-6">
                 <h3 className="text-sm font-bold text-gray-900">Agente a cargo</h3>
@@ -270,7 +268,7 @@ export default async function Propiedad({ params }) {
                 </div>
                 
                 <a
-                  href={`https://wa.me/5492990000000?text=${encodeURIComponent(`¡Hola! Consulto por la propiedad: ${title} (ID: ${params.id})`)}`}
+                  href={`https://wa.me/5492994213223?text=${encodeURIComponent(`¡Hola! Consulto por la propiedad: ${title} (ID: ${params.id})`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full flex items-center justify-center gap-2 bg-main-100 text-white text-sm font-semibold py-3.5 px-4 rounded-xl hover:bg-main-200 transition-colors shadow-md hover:shadow-lg"

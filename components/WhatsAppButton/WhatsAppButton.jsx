@@ -2,7 +2,7 @@
 import { FaWhatsapp } from 'react-icons/fa';
 
 export default function WhatsAppButton() {
-  const phoneNumber = '5492990000000'; // Reemplazar con el número real
+  const phoneNumber = '5492994213223'; // Reemplazar con el número real
   const defaultMessage = '¡Hola! Vi tu web y quería consultar...';
   
   const href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(defaultMessage)}`;
