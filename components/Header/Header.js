@@ -36,7 +36,7 @@ export function Header() {
             {/* Logo */}
             <Link href="/" className="flex-shrink-0 relative z-50">
               <Image
-                src="/assets/logo3.png"
+                src={isHomePage ? "/assets/logo3.png" : "/assets/logo1.png"}
                 width={310}
                 height={90}
                 alt="Logo"
@@ -141,10 +141,10 @@ export function Header() {
               Ver todas
             </Link>
           </li>
-          <li className="w-full mt-auto mb-10">
+          <li className="w-full mt-auto mb-10 text-center">
             <Link
               href="/contactame"
-              className="block w-full py-4 text-xl font-semibold bg-white text-main-100 rounded-xl shadow-lg hover:bg-gray-100 transition-all"
+              className="block w-full py-4 text-xl font-semibold bg-white text-main-100 rounded-xl shadow-lg hover:bg-gray-100 transition-all text-center"
               onClick={closeMenu}
             >
               Contactame
