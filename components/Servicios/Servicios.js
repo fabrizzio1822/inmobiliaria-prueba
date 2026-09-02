@@ -39,14 +39,14 @@ const ServiceItem = ({ service, index }) => {
                 return;
             }
 
-            // On mobile, trigger when the item crosses the vertical center of the screen
+            // On mobile, trigger when the item crosses the exact vertical center of the screen
             observer = new IntersectionObserver(
                 ([entry]) => {
                     setIsActive(entry.isIntersecting);
                 },
                 {
                     root: null,
-                    rootMargin: "-45% 0px -45% 0px",
+                    rootMargin: "-50% 0px -49% 0px", // 1% slice precisely at the center
                     threshold: 0
                 }
             );

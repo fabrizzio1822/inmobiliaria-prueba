@@ -86,10 +86,10 @@ export function Header() {
         >
           <X className="h-8 w-8" />
         </button>
-        <ul className="w-full px-8 text-center flex flex-col items-center justify-center h-full">
-          <li className="w-full mb-4 flex justify-center">
+        <ul className="w-full px-8 text-left flex flex-col justify-center h-full">
+          <li className="w-full mb-4 flex justify-start">
             <Link href="/" className="block py-3 transition-colors" onClick={closeMenu}>
-              <Image src="/assets/logo1.png" width={220} height={70} alt="Inicio" className="mx-auto" />
+              <Image src="/assets/logo1.png" width={180} height={60} alt="Inicio" className="brightness-0 invert" />
             </Link>
           </li>
           <li className="w-full mt-6 mb-4">
