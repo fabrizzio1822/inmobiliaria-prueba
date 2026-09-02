@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Keyboard, Mousewheel } from 'swiper/modules';
 import { IoClose } from 'react-icons/io5';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -112,21 +113,27 @@ const PropertyGallery = ({ photos = [], location = "Ubicación" }) => {
     <>
       {renderDesktopGrid()}
 
-      {/* Mobile Swipeable Carousel */}
-      <div className="md:hidden w-full h-[350px] overflow-hidden relative">
-        <Swiper
-          modules={[Pagination]}
-          pagination={{ clickable: true, dynamicBullets: true }}
-          className="w-full h-full"
-        >
-          {photos.map((p, i) => (
-            <SwiperSlide key={i} onClick={() => openModal(i)}>
-              <div className="relative w-full h-full">
-                <Image src={p.image} alt={`Foto ${i + 1} - ${location}`} fill className="object-cover" sizes="100vw" priority={i === 0} />
+      {/* Mobile Layout: Hero Image + Small Grid */}
+      <div className="md:hidden w-full flex flex-col gap-2 mb-2">
+        {/* Main image */}
+        <div className="relative w-full h-[280px] sm:h-[350px] cursor-pointer" onClick={() => openModal(0)}>
+          <Image src={photos[0].image} alt={`Foto 1 - ${location}`} fill className="object-cover" sizes="100vw" priority />
+        </div>
+        {/* Small grid of remaining images */}
+        {photos.length > 1 && (
+          <div className="grid grid-cols-4 gap-2 px-2">
+            {photos.slice(1, 5).map((p, i) => (
+              <div key={i + 1} className="relative aspect-square cursor-pointer overflow-hidden rounded-md" onClick={() => openModal(i + 1)}>
+                <Image src={p.image} alt={`Foto ${i + 2} - ${location}`} fill className="object-cover" sizes="25vw" />
+                {i === 3 && photos.length > 5 && (
+                  <div className="absolute inset-0 bg-black/60 flex items-center justify-center text-white font-medium text-sm sm:text-base">
+                    +{photos.length - 5}
+                  </div>
+                )}
               </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Fullscreen Modal */}
@@ -137,10 +144,22 @@ const PropertyGallery = ({ photos = [], location = "Ubicación" }) => {
           </button>
           
           <div className="w-full h-full relative flex items-center justify-center">
+            
+            {/* Custom Navigation Buttons for Modal */}
+            <button className="modal-prev absolute left-2 md:left-8 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-full bg-black/50 text-white hover:bg-main-100 transition-colors duration-200 focus:outline-none">
+              <FiChevronLeft size={28} />
+            </button>
+            <button className="modal-next absolute right-2 md:right-8 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-10 h-10 md:w-14 md:h-14 rounded-full bg-black/50 text-white hover:bg-main-100 transition-colors duration-200 focus:outline-none">
+              <FiChevronRight size={28} />
+            </button>
+
             <Swiper
               modules={[Navigation, Keyboard, Mousewheel, Pagination]}
               initialSlide={initialSlide}
-              navigation
+              navigation={{
+                prevEl: '.modal-prev',
+                nextEl: '.modal-next',
+              }}
               pagination={{ type: 'fraction', el: '.swiper-pagination-custom', renderFraction: function (currentClass, totalClass) { return `<span class="${currentClass}"></span> de <span class="${totalClass}"></span>`; } }}
               keyboard={{ enabled: true }}
               mousewheel={{ forceToAxis: true }}

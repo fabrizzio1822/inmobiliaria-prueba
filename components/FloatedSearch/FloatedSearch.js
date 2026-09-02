@@ -50,21 +50,21 @@ export default function FloatedSearch({ properties = [] }) {
 
   return (
     <Transition className="relative md:absolute md:-bottom-12 left-0 right-0 w-full md:w-[80%]  md:max-w-4xl mx-auto z-20">
-      <div className="bg-white rounded-2xl shadow-xl p-5 md:p-6 backdrop-blur">
+      <div className="bg-white rounded-2xl shadow-xl p-4 md:p-6 backdrop-blur">
 
         {/* Tabs con animación */}
-        <div className="relative flex gap-6 mb-6 px-2 border-b border-gray-200">
+        <div className="relative flex gap-6 mb-4 md:mb-6 px-2 border-b border-gray-200">
           <button
             type="button"
             onClick={() => setOperation('Venta')}
-            className={`pb-2 text-lg font-semibold transition-colors duration-300 relative z-10 ${operation === 'Venta' ? 'text-gray-900' : 'text-gray-400 hover:text-gray-600'}`}
+            className={`pb-2 text-base md:text-lg font-semibold transition-colors duration-300 relative z-10 ${operation === 'Venta' ? 'text-gray-900' : 'text-gray-400 hover:text-gray-600'}`}
           >
             Venta
           </button>
           <button
             type="button"
             onClick={() => setOperation('Alquiler')}
-            className={`pb-2 text-lg font-semibold transition-colors duration-300 relative z-10 ${operation === 'Alquiler' ? 'text-gray-900' : 'text-gray-400 hover:text-gray-600'}`}
+            className={`pb-2 text-base md:text-lg font-semibold transition-colors duration-300 relative z-10 ${operation === 'Alquiler' ? 'text-gray-900' : 'text-gray-400 hover:text-gray-600'}`}
           >
             Alquiler
           </button>
@@ -79,11 +79,11 @@ export default function FloatedSearch({ properties = [] }) {
         </div>
 
         {/* Formularios */}
-        <form onSubmit={handleSearch} className="flex flex-col md:flex-row items-center gap-4 bg-gray-50 md:bg-white md:border md:border-gray-200 rounded-xl p-2 md:p-0">
+        <form onSubmit={handleSearch} className="flex flex-col md:flex-row items-center gap-2 md:gap-4 bg-gray-50 md:bg-white md:border md:border-gray-200 rounded-xl p-1.5 md:p-0">
 
           {/* Campo Ubicación */}
-          <div className="flex flex-col w-full md:w-1/2 px-4 py-2 border-b md:border-b-0 md:border-r border-gray-200">
-            <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1 cursor-pointer">Ubicación</label>
+          <div className="flex flex-col w-full md:w-1/2 px-3 py-1.5 md:px-4 md:py-2 border-b md:border-b-0 md:border-r border-gray-200">
+            <label className="text-[10px] md:text-xs font-semibold text-gray-400 uppercase tracking-wider mb-0.5 md:mb-1 cursor-pointer">Ubicación</label>
             <div className="relative">
               <select
                 value={location}
@@ -101,8 +101,8 @@ export default function FloatedSearch({ properties = [] }) {
           </div>
 
           {/* Campo Tipo de Propiedad */}
-          <div className="flex flex-col w-full md:w-1/2 px-4 py-2 border-b md:border-b-0 border-gray-200">
-            <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-1 cursor-pointer">Tipo de Propiedad</label>
+          <div className="flex flex-col w-full md:w-1/2 px-3 py-1.5 md:px-4 md:py-2 border-b md:border-b-0 border-gray-200">
+            <label className="text-[10px] md:text-xs font-semibold text-gray-400 uppercase tracking-wider mb-0.5 md:mb-1 cursor-pointer">Tipo de Propiedad</label>
             <div className="relative">
               <select
                 value={propertyType}
@@ -120,10 +120,10 @@ export default function FloatedSearch({ properties = [] }) {
           </div>
 
           {/* Botón Buscar */}
-          <div className="w-full md:w-auto md:ml-auto p-2 md:p-2">
+          <div className="w-full md:w-auto md:ml-auto p-1.5 md:p-2 mt-1 md:mt-0">
             <button
               type="submit"
-              className="w-full md:w-36 flex items-center justify-center gap-2 bg-main-100 hover:bg-main-200 text-white font-semibold py-4 px-6 rounded-xl transition-colors shadow-md"
+              className="w-full md:w-36 flex items-center justify-center gap-2 bg-main-100 hover:bg-main-200 text-white font-semibold py-3 md:py-4 px-6 rounded-xl transition-colors shadow-md"
             >
               <RiSearch2Line size={20} />
               Buscar

@@ -53,10 +53,10 @@ export default function Banner({ properties = [] }) {
 
         {/* Contenedor del texto (padding reducido en mobile) */}
         <div className="relative z-10 w-full pt-28 px-6 md:pt-48 md:px-16 lg:px-24">
-          <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight max-w-3xl">
+          <h1 className="font-serif text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight max-w-3xl">
             Encontrá el lugar donde empieza tu <span className="italic font-medium">próxima etapa</span>
           </h1>
-          <p className="mt-4 md:mt-6 text-sm sm:text-base md:text-lg text-white/90 max-w-lg font-medium">
+          <p className="hidden md:block mt-4 md:mt-6 text-sm sm:text-base md:text-lg text-white/90 max-w-lg font-medium">
             Descubrí oportunidades pensadas para cada momento, con información clara y acompañamiento profesional de principio a fin.
           </p>
         </div>
