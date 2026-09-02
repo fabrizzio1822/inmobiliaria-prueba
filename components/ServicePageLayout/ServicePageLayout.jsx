@@ -64,20 +64,7 @@ export default function ServicePageLayout({ serviceId, children }) {
                   <ArrowRight size={18} />
                 </a>
 
-                {service.hasModalForm && (
-                  <>
-                    {isModalOpen && (
-                      <Modal onClose={() => setIsModalOpen(false)} />
-                    )}
 
-                    <button
-                      onClick={() => setIsModalOpen(true)}
-                      className="bg-gray-100 text-gray-900 font-bold py-4 px-8 rounded-full hover:bg-gray-200 transition-colors border border-gray-200"
-                    >
-                      Solicitar información
-                    </button>
-                  </>
-                )}
 
               </div>
 
@@ -103,7 +90,7 @@ export default function ServicePageLayout({ serviceId, children }) {
         <div className="bg-main-100 text-white py-12 md:py-16">
           <div className="container mx-auto px-6">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="flex items-center justify-center md:justify-start lg:justify-center gap-4 group">
+              <div className="flex items-center justify-start lg:justify-center gap-4 group">
                 <div className="p-4 bg-white/10 rounded-2xl backdrop-blur-sm border border-white/20 transition-all">
                   <Building2 className="w-8 h-8 text-white" strokeWidth={1.5} />
                 </div>
@@ -111,7 +98,7 @@ export default function ServicePageLayout({ serviceId, children }) {
                   Martillera y Corredora Pública
                 </span>
               </div>
-              <div className="flex items-center justify-center md:justify-center gap-4 group">
+              <div className="flex items-center justify-start lg:justify-center gap-4 group">
                 <div className="p-4 bg-white/10 rounded-2xl backdrop-blur-sm border border-white/20 transition-all">
                   <TrendingUp className="w-8 h-8 text-white" strokeWidth={1.5} />
                 </div>
@@ -119,7 +106,7 @@ export default function ServicePageLayout({ serviceId, children }) {
                   Experiencia financiera <br className="hidden lg:block" />+ visión de negocios
                 </span>
               </div>
-              <div className="flex items-center justify-center md:justify-end lg:justify-center gap-4 group">
+              <div className="flex items-center justify-start lg:justify-center gap-4 group">
                 <div className="p-4 bg-white/10 rounded-2xl backdrop-blur-sm border border-white/20 transition-all">
                   <Award className="w-8 h-8 text-white" strokeWidth={1.5} />
                 </div>
