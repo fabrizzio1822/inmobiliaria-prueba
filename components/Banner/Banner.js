@@ -24,7 +24,7 @@ export default function Banner({ properties = [] }) {
   return (
     <div className="w-full relative mb-16 md:px-6">
       {/* Banner sin margen top y con radius solo abajo */}
-      <div className="w-full min-h-[95vh] relative flex flex-col">
+      <div className="w-full min-h-[max(95vh,650px)] md:min-h-[max(95vh,750px)] relative flex flex-col">
 
         {/* Capa de fondo separada para mantener el overflow-hidden sin recortar el buscador */}
         <div className="absolute inset-0 overflow-hidden rounded-b-[2rem] lg:rounded-b-[3rem] z-0">
@@ -51,8 +51,8 @@ export default function Banner({ properties = [] }) {
           <div className="absolute inset-0 bg-black/40 pointer-events-none"></div>
         </div>
 
-        {/* Contenedor del texto (padding reducido en mobile) */}
-        <div className="relative z-10 w-full pt-28 px-6 md:pt-48 md:px-16 lg:px-24">
+        {/* Contenedor del texto (padding reducido en mobile y dinámico por altura) */}
+        <div className="relative z-10 w-full pt-[clamp(5rem,15vh,7rem)] px-6 md:pt-[clamp(7rem,20vh,12rem)] md:px-16 lg:px-24">
           <h1 className="font-serif text-4xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight max-w-3xl">
             Encontrá el lugar donde empieza tu <span className="italic font-medium">próxima etapa</span>
           </h1>
@@ -61,8 +61,8 @@ export default function Banner({ properties = [] }) {
           </p>
         </div>
 
-        {/* Espaciador flexible para empujar el buscador hacia abajo */}
-        <div className="relative z-20 w-full mt-auto mb-8 md:mb-12 lg:mb-20 md:flex md:justify-center px-2 sm:px-4 pb-8">
+        {/* Espaciador flexible para empujar el buscador hacia abajo, con altura mínima en desktop para evitar solapamiento */}
+        <div className="relative z-20 w-full mt-auto mb-8 md:mb-12 lg:mb-20 md:flex md:justify-center px-2 sm:px-4 pb-8 md:min-h-[140px]">
           <FloatedSearch properties={properties} />
         </div>
 

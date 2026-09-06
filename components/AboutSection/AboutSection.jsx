@@ -36,7 +36,7 @@ export default function AboutSection({ totalProperties = 0 }) {
           <span className="text-sm text-gray-400 tracking-wide font-light">Familias felices</span>
         </div>
         <div className="flex flex-col">
-          <span className="text-2xl md:text-3xl lg:text-[40px] font-medium tracking-tight mb-2 lg:mb-4 leading-tight">Neuquén y<br />Patagonia</span>
+          <span className="text-2xl md:text-3xl lg:text-[40px] font-medium tracking-tight mb-2 lg:mb-4 leading-tight">Neuquén</span>
           <span className="text-sm text-gray-400 tracking-wide font-light mt-1">Zona de cobertura</span>
         </div>
       </div>
